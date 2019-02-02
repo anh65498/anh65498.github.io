@@ -1,0 +1,107 @@
+body {
+    background: #116466;
+    padding: 1%;
+}
+
+.center {         /* center in the middle of parent's container */
+  margin: 0 auto;
+}
+
+/* navbar */
+.nav-bar {
+
+}
+.navbar-inverse .navbar-nav>li>a {	/*text in navbar */
+	color: snow;
+  font-family: 'Noto Serif TC', serif;
+	font-size: 16px;
+	font-weight: 600;
+	color: white;
+}
+
+.navbar-right{
+	padding-right: 30px;
+}
+
+
+.navbar-inverse .navbar-brand {
+	color: seashell;
+}
+
+.glyphicon-heart-empty{
+	margin-left: 3px;
+}
+
+/* body */
+.container {				/* includes jumbotron, img */
+	margin: 80px auto;
+}
+
+.scoreCard{
+    background: #FFC39A;
+    width: 40%;
+    height: 450px;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 2.5%;
+}
+
+.winner-Score{
+    color: green;
+  }
+
+#gameNameDisplay {
+    background: tomato;
+    padding: 25px 40px;
+    margin: 0px auto;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2em;
+}
+
+
+
+.maxScoreDisplay {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+
+}
+
+
+.scoreboard{
+  padding: 30px 0px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#maxScore{
+  width: 50px;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+  padding: 20px 104.2px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.P1Button, .P2Button {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.resetButton{
+  background-color: ;
+}
+
+.winner {
+  border: double 5px red;
+  color: red;
+  text-align: center;
+  text-transform: uppercase;
+  width: 50%;
+  margin: 0 auto;     /* align div to the center of its container */
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

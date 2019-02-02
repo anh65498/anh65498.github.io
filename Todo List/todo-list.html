@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> <!-- for nav bar -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+
+	<!-- add some link to favicon.ico -->
+	<title>Todo List</title>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<!-- navbar-inverse: turn background black and text white, navbar-fixed-top: fix the navbar at the top while we scroll. Without it, navbar disappear when scroll down -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span> <!-- each span class="icon-bar" is a bar inside the hamburger lol -->
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="../index.html"> Anh Pham
+
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<!-- whatever is inside this div class will be hidden or it will be grouped under hamburger button on tablet/mobile devices-->
+
+				<ul class="nav navbar-nav">
+					<li><a href="#">About Me</a></li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio<span class="caret"></span></a> <!-- required Bootstrap JS -->
+						<ul class="dropdown-menu">
+							<li><a href="../Study%20Buddy%20Landing%20Page/Startup-landing-page.html">StudyBuddy Startup Page</a></li>
+
+							<li role="separator" class="divider"></li>
+							<li><a href="../Score%20Keeper/Score_Keeper.html">Game Score Keeper<span class="sr-only">(current)</span></a></li>
+
+
+							<li role="separator" class="divider"></li>
+							<li><a href="../Fun%20RGB%20Color%20Guessing%20Game/rgb-color-guessing-game.html">RGB Color Guessing Game</a></li>
+
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Tic Tac Toe</a></li>
+						</ul>
+					</li>
+
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Hire!</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Login</a></li>
+				</ul>
+
+			</div><!-- /.navbar-collapse -->
+
+		</nav>
+	</div> <!-- /.container-fluid -->
+
+	<div id="todo">
+		<div id="header">
+			<h1>Todo List<i class="fas fa-pencil-alt"></i></h1> <!-- id: unique identifier for CSS to apply style to-->
+			<h3 class="italic">December 14 - January 9</h3>
+		</div>
+		<input id="newTask" type="text" name="" value="" placeholder="Add New Todo">
+		<ul class="todos">
+			<li>Build personal About me page<span><i class="fas fa-trash-alt"></i></span></li>
+			<li>Find a job for the holidays<span><i class="fas fa-trash-alt"></i></span></li>
+			<li>Revamp my resume <span><i class="fas fa-trash-alt"></i></span></li>
+			<li>Finish a site that allow people to play tic tac toe, 2 player<span><i class="fas fa-trash-alt"></i></span></li>
+			<li>Fix the Portfolio drop down triangle in navbar <span><i class="fas fa-trash-alt"></i></span></li>
+			<!-- <li><span><i class="fas fa-trash-alt"></i></span>Make dinner every night</li> -->
+
+
+
+		</ul>
+		<div id="buttons">
+			<button type="button" name="button" class="save">Save</button>
+			<button type="button" name="button" class="clear">Clear</button>
+			<button type="button" name="button" class="tipBtn">Tips</button>
+		</div>
+
+
+	</div> <!-- end of #todo -->
+
+	<!-- dependency of Bootstrap for navbar-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" href="todo-list.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	<!-- javascript -->
+	<!-- <script type="text/javascript" src="todo-list.js">
+	</script> -->
+	<!-- jquery -->
+	<script type="text/javascript" src="todo-list-jquery.js">
+	</script>
+</body>
+
+</html>

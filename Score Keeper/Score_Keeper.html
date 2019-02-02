@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Score Keeper</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="Score_Keeper.css">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,600,700, 900" rel="stylesheet">
+
+	</style>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<!-- navbar-inverse: turn background black and text white, navbar-fixed-top: fix the navbar at the top while we scroll. Without it, navbar disappear when scroll down -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span> <!-- each span class="icon-bar" is a bar inside the hamburger lol -->
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="../index.html"> Anh Pham
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<!-- whatever is inside this div class will be hidden or it will be grouped under hamburger button on tablet/mobile devices-->
+
+				<ul class="nav navbar-nav">
+					<li><a href="#">About Me</a></li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio<span class="caret"></span></a> <!-- required Bootstrap JS -->
+						<ul class="dropdown-menu">
+
+							<li><a href="../Fun%20RGB%20Color%20Guessing%20Game/rgb-color-guessing-game.html">Fun Color Guessing Game<span class="sr-only">(current)</span></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="../Study%20Buddy%20Landing%20Page/Startup-landing-page.html">StudyBuddy Startup Page</a></li>
+
+							<li role="separator" class="divider"></li>
+							<li><a href="../Photo%20Gallery/photo-gallery.html">Photo Gallery<span class="sr-only">(current)</span></a></li>
+
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Tic Tac Toe</a></li>
+						</ul>
+					</li>
+
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Hire!</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Login</a></li>
+				</ul>
+
+			</div><!-- /.navbar-collapse -->
+		</nav>
+	</div> <!-- .container-fluid -->
+
+
+
+	<div class="container">
+		<!--fixed-width -->
+
+
+		<div class="row">
+			<div class="col-md-6 col-sm-12 scoreCard">
+				<!-- <div class="scoreCard"> -->
+				<h1 id="gameNameDisplay">Tick Tac Toe</h1>
+
+				<form class="form-inline">
+					<div class="row">
+						<div class="form-inline">
+
+							<div class=" maxScoreDisplay">
+								<label for="maxScore">Playing to: </label>
+								<input type="number" class="form-control" id="maxScore" min="1" value="5">
+							</div>
+						</div>
+					</div>
+				</form>
+
+
+				<h1 class="scoreboard"><span id="p1ScoreDisplay">0</span> to <span id="p2ScoreDisplay">0</span></h1>
+				<div class="col-lg-6 P1Button">
+					<button type="button" class="btn btn-primary btn-block" name="P1">Player 1</button>
+				</div>
+				<div class="col-lg-6 P2Button">
+					<button type="button" class="btn btn-danger btn-block" name="P2">Player 2</button>
+				</div>
+				<button type="button" name="reset" class="btn btn-warning btn-block resetButton">Reset</button>
+				<div id="displayWinner"></div>
+			</div>
+
+
+
+
+
+			<div class="col-md-6 col-sm-12 scoreCard">
+				<!-- <div class=" scoreCard"> -->
+
+				<h1 id="gameNameDisplay">New Game</h1>
+				<form action="https://www.anhpham.us" method="">
+					<label for=""></label>
+			</div><!-- .scoreCard -->
+		</div>
+
+
+	</div> <!-- .container -->
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="Score_Keeper.js"></script>
+</body>
+
+</html>
+
+<!-- To do:
+1) Ask user which score do they wanna play until and replace
+2) Add new score card
+-->

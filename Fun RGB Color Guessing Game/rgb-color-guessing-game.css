@@ -1,0 +1,425 @@
+body{
+  background-color: black;
+  color: white;
+  position: relative; /* When you set the position relative to an element, without adding any other positioning attributes (top, bottom, right, left) nothing will happen. When you add an additional position, such as left: 20px the element will move 20px to the right from its normal position. Here, you can see that this element is relative to itself. When the element moves, no other element on the layout will be affected */
+  overflow-x: hidden;
+}
+
+/* Sidebar */
+/* Credit: https://bootsnipp.com/snippets/featured/fancy-sidebar-navigation */
+body, html {
+  height: 100%;
+}
+
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {background-color: transparent;}
+
+/*-------------------------------*/
+/*           Wrappers            */
+/*-------------------------------*/
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;  /* how to change properties's value smoothly. all - applied to all element for seconds. transition effect will start when the specified CSS property (width) changes value.*/
+}
+
+#wrapper.toggled {
+    padding-left: 220px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    left: 220px;
+    width: 0;
+    height: 100%;
+    margin-left: -220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #1a1a1a;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#sidebar-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 220px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    padding-top: 0px; /* if you want a black strip that spans across the screen underneath the hamburger, increase this property's value */
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -220px;
+}
+
+/*-------------------------------*/
+/*     Sidebar nav styles        */
+/*-------------------------------*/
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 220px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+.sidebar-nav li {
+    position: relative;
+    line-height: 20px;
+    display: inline-block;
+    width: 100%;
+}
+
+.sidebar-nav li:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 3px;
+    background-color: #1c1c1c;
+    -webkit-transition: width .2s ease-in;
+      -moz-transition:  width .2s ease-in;
+       -ms-transition:  width .2s ease-in;
+            transition: width .2s ease-in;
+
+}
+.sidebar-nav li:first-child a {
+    color: #fff;
+    background-color: #1a1a1a;
+}
+.sidebar-nav li:nth-child(2):before {
+    background-color: #ec1b5a;
+}
+.sidebar-nav li:nth-child(3):before {
+    background-color: #79aefe;
+}
+.sidebar-nav li:nth-child(4):before {
+    background-color: #314190;
+}
+.sidebar-nav li:nth-child(5):before {
+    background-color: #279636;
+}
+.sidebar-nav li:nth-child(6):before {
+    background-color: #7d5d81;
+}
+.sidebar-nav li:nth-child(7):before {
+    background-color: #ead24c;
+}
+.sidebar-nav li:nth-child(8):before {
+    background-color: #2d2366;
+}
+.sidebar-nav li:nth-child(9):before {
+    background-color: #35acdf;
+}
+.sidebar-nav li:hover:before,
+.sidebar-nav li.open:hover:before {
+    width: 100%;
+    -webkit-transition: width .2s ease-in;
+      -moz-transition:  width .2s ease-in;
+       -ms-transition:  width .2s ease-in;
+            transition: width .2s ease-in;
+}
+
+.sidebar-nav li a {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    padding: 10px 15px 10px 30px;
+    font-size: 1.2em;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus,
+.sidebar-nav li.open a:hover,
+.sidebar-nav li.open a:active,
+.sidebar-nav li.open a:focus{
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 1.6em;
+    font-weight: bold;
+    line-height: 44px;
+}
+
+.sidebar-nav .dropdown-menu {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: #222;
+    box-shadow: none;
+}
+
+.glyphicon-heart{
+  margin-left: 3px;
+}
+
+/*-------------------------------*/
+/*       Hamburger-Cross         */
+/*-------------------------------*/
+
+.hamburger {
+  position: fixed;
+  top: 20px;
+  z-index: 999;
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 15px;
+  background: transparent;
+  border: none;
+}
+.hamburger:hover,
+.hamburger:focus,
+.hamburger:active {
+  outline: none;
+}
+.hamburger.is-closed:before {
+  content: '';
+  display: block;
+  width: 100px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 32px;
+  text-align: center;
+  opacity: 0;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed:hover:before {
+  opacity: 1;
+  display: block;
+  -webkit-transform: translate3d(-100px,0,0);
+  -webkit-transition: all .35s ease-in-out;
+}
+
+.hamburger.is-closed .hamb-top,
+.hamburger.is-closed .hamb-middle,
+.hamburger.is-closed .hamb-bottom,
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-middle,
+.hamburger.is-open .hamb-bottom {
+  position: absolute;
+  left: 0;
+  height: 4px;
+  width: 100%;
+}
+.hamburger.is-closed .hamb-top,
+.hamburger.is-closed .hamb-middle,
+.hamburger.is-closed .hamb-bottom {
+  background-color: white;
+}
+.hamburger.is-closed .hamb-top {
+  top: 5px;
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed .hamb-middle {
+  top: 50%;
+  margin-top: -2px;
+}
+.hamburger.is-closed .hamb-bottom {
+  bottom: 5px;
+  -webkit-transition: all .35s ease-in-out;
+}
+
+.hamburger.is-closed:hover .hamb-top {
+  top: 0;
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed:hover .hamb-bottom {
+  bottom: 0;
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-middle,
+.hamburger.is-open .hamb-bottom {
+  background-color: white;
+}
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-bottom {
+  top: 50%;
+  margin-top: -2px;
+}
+.hamburger.is-open .hamb-top {
+  -webkit-transform: rotate(45deg);
+  -webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
+}
+.hamburger.is-open .hamb-middle { display: none; }
+.hamburger.is-open .hamb-bottom {
+  -webkit-transform: rotate(-45deg);
+  -webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
+}
+.hamburger.is-open:before {
+  content: '';
+  display: block;
+  width: 100px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 32px;
+  text-align: center;
+  opacity: 0;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-open:hover:before {
+  opacity: 1;
+  display: block;
+  -webkit-transform: translate3d(-100px,0,0);
+  -webkit-transition: all .35s ease-in-out;
+}
+
+/*----------------------------------------*/
+/*            Overlay                     */
+/* To mask the page's content with a fog  */
+/*----------------------------------------*/
+
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(250,250,250,.8);
+    z-index: 1;
+}
+
+.navbar-inverse .navbar-nav>li>a {	/* change the color of text in navbar */
+	color: snow;
+}
+
+.navbar-inverse .navbar-brand {
+	color: seashell;
+}
+/* End of nav bar */
+
+/* Page content */
+.container-of-squares {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+
+.jumbotron {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;    /* make every letter uppercase */
+  font-weight: 900;		/* make it bold */
+  background-color: steelblue;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.jumbotron h2{
+	/*width: 63.32%;				/* make the line shorter */
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 900;
+  line-height: 1.4;
+  font-size: 24px;
+}
+
+#rgb-display {
+  font-size:200%;
+}
+
+#options-bar{
+  background-color: white;
+  height: 30px;
+  text-align: center;
+  /* width: 60%; */
+  color: black
+}
+
+#resetButton{
+  text-transform: uppercase;
+}
+
+/*when either easy or hard button is selected, change its background color */
+.selected {
+  color: white;
+  background: steelblue;
+}
+
+
+button {
+  /* border: none;
+  background: none */
+  border: 0;      /* get rid of the border and background */
+  text-transform: uppercase;
+  height: 100%;   /* button goes all the wy from top to bottom of the div */
+  font-weight: 700;
+  color: steelblue;
+  letter-spacing: 1px;  /* increase the spacing between each letter */
+  transition: all 0.3s;  /* how to animate any properties' transition. all-applied to all element for 2 seconds */
+  background: white;
+}
+
+button:hover {
+    color: white;
+    background: steelblue;
+}
+
+button:focus {outline:0;}
+
+#try-again-display {
+  display: inline-block;  /* same as inline, but allows to set a width and height on the element. */
+  width: 30% ;            /* rgb-display takes up 20% of option-bar */
+}
+
+.modal-dialog {
+  width: 500px;
+  height: 500px;
+  top: 10%;         /*Set the top edge of the positioned <div> element 25% down from the top edge of its nearest positioned ancestor*/
+  margin: auto;
+}
+
+/* cover the background of modal box with an image */
+.modal-body img{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.square {
+    width: 30%;   /* 30% of .container, 3 squares per row, 3 * 30 = 90% */
+    height: 45%;
+    margin: 1.66%;
+    /* background: purple;     /* change the background-color of each square to purple for debug */
+    /* if nothing shows up on the screen, that's because the divs' contents are empty.
+    One way to fix this is padding */
+    padding-bottom: 30%;
+    float: left;      /* each square no longer takes up a whole line, they are side by side.
+                      Also, with width: 30%, it helps to set 3 squares each row */
+    border-radius: 15%;   /* round the corners of the squares */
+    transition: background-color 1s;    /* fade squares to background */
+    --webkit-transition: background-color 1s; /* transition prop isn't built in to every browser */
+    --moz-transition: background-color 1s;
+}

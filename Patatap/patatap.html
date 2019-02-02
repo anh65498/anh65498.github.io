@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script> <!-- for sound -->
+  <script type="text/javascript" src="lib/paperjs-v0/dist/paper-full.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <style media="screen">
+    body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Lobster';
+  }
+
+  canvas {
+    width: 100%;      /* expand canvas to cover the whole page */
+    background: black;
+  }
+  </style>
+
+  <script type="text/paperscript" canvas="myCanvas">
+  //print the height and width of canvas to JS console
+  console.log(view.size); //Paper.js -> Reference -> view -> Type: View
+
+  //creates a circle shaped path item with a red fill color.
+  var arrayOfCircles = [];
+  var pageTitle = new PointText(new Point(view.size.width / 2, (view.size.height / 2) - 5));
+  var text = new PointText(new Point(view.size.width / 2, (view.size.height / 2) + 50));
+  drawTitle();
+  drawDescription();
+
+  var keyData = {
+    q: {
+      sound: new Howl({
+        src: ['sounds/BassDrums/HardKick.wav']
+      }),
+      color: '#1abc9c'
+    },
+    w: {
+      sound: new Howl({
+        src: ['sounds/BassDrums/Kick1.wav']
+      }),
+      color: '#2ecc71'
+    },
+    e: {
+      sound: new Howl({
+        src: ['sounds/']
+      }),
+      color: '#3498db'
+    },
+    r: {
+      sound: new Howl({
+        src: ['sounds/FX/Noise1.wav']
+      }),
+      color: '#9b59b6'
+    },
+    t: {
+      sound: new Howl({
+        src: ['sounds/Hats/hat5.wav']
+      }),
+      color: '#34495e'
+    },
+    y: {
+      sound: new Howl({
+        src: ['sounds/Hats/hat6.wav']
+      }),
+      color: '#16a085'
+    },
+    u: {
+      sound: new Howl({
+        src: ['sounds/Hats/hat8.wav']
+      }),
+      color: '#27ae60'
+    },
+    i: {
+      sound: new Howl({
+        src: ['sounds/Basslines/Bassline3.wav']
+      }),
+      color: '#2980b9'
+    },
+    o: {
+      sound: new Howl({
+        src: ['sounds/sounds/Basslines/Bassline8.wav']
+      }),
+      color: '#8e44ad'
+    },
+    p: {
+      sound: new Howl({
+        src: ['sounds/Basslines/Bassline9.wav']
+      }),
+      color: '#2c3e50'
+    },
+    a: {
+      sound: new Howl({
+        src: ['sounds/Loops/drum_loop1.wav']
+      }),
+      color: '#f1c40f'
+    },
+    s: {
+      sound: new Howl({
+        src: ['sounds/Loops/drum_loop5.wav']
+      }),
+      color: '#e67e22'
+    },
+    d: {
+      sound: new Howl({
+        src: ['sounds/Loops/drum_loop10.wav']
+      }),
+      color: '#e74c3c'
+    },
+    f: {
+      sound: new Howl({
+        src: ['sounds/Pads/Pad1.wav']
+      }),
+      color: '#95a5a6'
+    },
+    g: {
+      sound: new Howl({
+        src: ['sounds/Pads/Pad2.wav']
+      }),
+      color: '#f39c12'
+    },
+    h: {
+      sound: new Howl({
+        src: ['sounds/Pads/Pad4.wav']
+      }),
+      color: '#d35400'
+    },
+    j: {
+      sound: new Howl({
+        src: ['sounds/Claps/clap1.wav']
+      }),
+      color: '#1abc9c'
+    },
+    k: {
+      sound: new Howl({
+        src: ['sounds/Claps/clap4.wav']
+      }),
+      color: '#2ecc71'
+    },
+    l: {
+      sound: new Howl({
+        src: ['sounds/Claps/clap10.wav']
+      }),
+      color: '#3498db'
+    },
+    z: {
+      sound: new Howl({
+        src: ['sounds/Percussions/perc5.wav']
+      }),
+      color: '#9b59b6'
+    },
+    x: {
+      sound: new Howl({
+        src: ['sounds/Percussions/perc2.wav']
+      }),
+      color: '#34495e'
+    },
+    c: {
+      sound: new Howl({
+        src: ['sounds/Percussions/perc4.wav']
+      }),
+      color: '#16a085'
+    },
+    v: {
+      sound: new Howl({
+        src: ['sounds/FX/FX1.wav']
+      }),
+      color: '#27ae60'
+    },
+    b: {
+      sound: new Howl({
+        src: ['sounds/FX/FX2.wav']
+      }),
+      color: '#2980b9'
+    },
+    n: {
+      sound: new Howl({
+        src: ['sounds/FX/FX5.wav']
+      }),
+      color: '#8e44ad'
+    },
+    m: {
+      sound: new Howl({
+        src: ['sounds/FX/FX6.wav']
+      }),
+      color: '#2c3e50'
+    }
+  }
+
+  console.log(arrayOfCircles);
+
+  // When user press any key on the keyboard on the keyboard
+  function onKeyDown(event) {
+    if (keyData[event.key]) { //if condition exists (if user press keys that are in keyData)
+      // create a random point
+      var maxPoint = new Point(view.size.width, view.size.height);
+      var rand = Point.random(); //random x and y values between 0 and 1
+      var randomPoint = rand * maxPoint;
+      // Create a circle at random point/location
+      var myCircle = new Path.Circle(randomPoint, 400);
+      myCircle.fillColor = keyData[event.key].color;
+      arrayOfCircles.push(myCircle);
+      keyData[event.key].sound.play();
+    }
+  }
+
+
+  // repeated on every frame: changing the color of all of the circles and reduce their size
+  function onFrame(event) {
+    //var myCircle = new Path.Circle((100, 100), 30);
+    for (var i = 0; i < arrayOfCircles.length; i++) {
+      //for (let circle in arrayOfCircles){
+      //console.log(arrayOfCircles[i])
+      arrayOfCircles[i].fillColor.hue += 1; // Change the fill color of the path slightly
+      arrayOfCircles[i].scale(.9); // every frame, scale the circle by 0.9
+      //remove the circle from the array and screen
+      if (arrayOfCircles[i].area < 1){
+        arrayOfCircles[i].remove();    //remove the circle from canvas
+        arrayOfCircles.splice(i, 1); // remove the circle from the array
+        //console.log(circles);
+      }
+
+    }
+  }
+  // draw title PATATAP on screen
+  function drawTitle() {
+    pageTitle.justification = 'center';
+    pageTitle.fillColor = 'white';
+    pageTitle.content = 'PATATAP';
+    pageTitle.fontFamily = 'Lobster';
+    pageTitle.fontSize = '5em';
+  }
+
+  // draw the description of this website on screen
+  function drawDescription() {
+    text.justification = 'center';
+    text.fillColor = 'white';
+    text.content = 'Press any alphabet keys on the keyboard';
+    text.fontSize = '1.5em';
+  }
+  </script>
+</head>
+
+<body>
+  <canvas id="myCanvas" resize></canvas>
+</body>
+</html>
+
+<!--
+if you want to get rid of the Cross Origin errors in the console, you'll need to run a local HTTP server from your project's directory and load the patatap.html file from there. The steps are as follows:
+
+
+1) navigate to your project folder in the terminal
+
+2) if you have python v2.x installed then run:
+
+python -m SimpleHTTPServer
+ or for python v3.x:
+
+python -m http.server
+3) open up your browser and navigate to http://localhost:8000
+
+4) select the circles.html file
+
+-->

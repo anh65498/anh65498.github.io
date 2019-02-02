@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>RGB Color Guessing Game</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="rgb-color-guessing-game.css">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="overlay"></div>
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+      <!-- navbar-inverse: turn background black and text white, navbar-fixed-top: fix the navbar at the top while we scroll. Without it, navbar disappear when scroll down -->
+      <!-- <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span> <!-- each span class="icon-bar" is a bar inside the hamburger lol -->
+      <!-- <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html"> Anh Pham </a>
+          </div> -->
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <!-- <div class="collapse navbar-collapse" id="navbar-collapse-1"> -->
+      <!-- whatever is inside this div class will be hidden or it will be grouped under hamburger button on tablet/mobile devices-->
+
+      <ul class="nav sidebar-nav">
+        <li class="sidebar-brand">
+          <a href="../index.html">Anh Pham</a>
+        </li>
+        <li><a href="#">About Me</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio<span class="caret"></span></a> <!-- required Bootstrap JS -->
+          <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-header"></li>
+            <li><a href="../Photo%20Gallery/photo-gallery.html">Photo Gallery</a></li>
+            <li><a href="../Todo List/todo-list.html">Todo List</a></li>
+            <li><a href="../Study%20Buddy%20Landing%20Page/Startup-landing-page.html">StudyBuddy Startup Page</a></li>
+            <li><a href="../Score%20Keeper/Score_Keeper.html">Game Score Keeper</a></li>
+            <li><a href="#">Tic Tac Toe</a></li>
+          </ul> <!-- .dropdown-menu -->
+        </li>
+
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Hire!<i class="glyphicon glyphicon-heart"></i></a></a></li>
+        <li><a href="#">Login</a></li>
+      </ul> <!-- .nav .sidebar-nav -->
+    </nav>
+
+
+    <!-- Page Content -->
+    <!-- <div class="container-fluid"> -->
+    <div id="page-content-wrapper">
+      <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+      </button>
+
+      <div class="jumbotron">
+        <!-- id to override bootstrap color -->
+        <h2>The Great
+          <br>
+          <span id="rgb-display">RGB</span>
+          <br>
+          Guessing Game
+        </h2>
+      </div>
+
+      <div id="options-bar">
+        <button type="button" name="button" class="mode">Easy</button>
+        <button type="button" name="button" class="mode selected">Hard</button>
+        <!-- Trigger the hint modal with a button -->
+        <button type="button" data-toggle="modal" data-target="#myModal">Hint</button>
+
+        <!-- Hint Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Hint Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+                <img src="primary_color_circles.png" alt="primary_colors">
+                <p>RGB is a popular color model in which red, green and blue light are added together in various ways to reproduce a broad array of colors. </p>
+                <p>Each color is a combination of 3 arguments. First argument indicates the intensity of red. The second indicates that of green and last one indicates that of blue.</p>
+                <p>By observing the diagram above, can you guess the color now?</p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- .modal fade -->
+
+
+        <span id="try-again-display"></span>
+        <button type="button" name="button" id="resetButton">New Color</button>
+      </div> <!-- .options-bar -->
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <!-- use pure CSS no Bootstrap here -->
+            <div class="container-of-squares">
+              <div class="square">
+              </div>
+              <div class="square">
+              </div>
+              <div class="square">
+
+              </div>
+              <div class="square">
+
+              </div>
+              <div class="square">
+
+              </div>
+              <div class="square">
+
+              </div>
+
+            </div> <!-- .container-of-squares -->
+          </div>
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- page-content-wrapper -->
+  </div> <!-- .wrapper -->
+
+  <!-- include JS and Jquery for dropdown in navbar -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="rgb-color-guessing-game.js"></script>
+</body>
+
+</html>

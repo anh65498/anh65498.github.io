@@ -1,0 +1,55 @@
+body {
+	color: white;
+	background-color: #659DBD;
+	background: url("https://wallpapercave.com/wp/wp2842402.jpg");
+	background-repeat: no-repeat;		
+	background-size: cover;
+
+}
+
+ol {
+	color: pink;
+}
+
+nav {
+	background: url("nav-background-cactus.jpg");
+}
+/* 
+	NOTES ON CSS: 
+- CSS: Cascading Style Sheet, meaning that the lower method will override the upper method 
+- Syntax: 
+	selector {
+		property: value;
+	}
+- selector can be element, ID, class
+- element: HTML tag keyword, will affect all of element of the same name in the HTML except overriden under it ;
+- ID: each ID's name is unique
+	HTML syntax example: <div id="IDname"> </div>
+	CSS  syntax example: #IDname { property: value; };
+- 
+- For 127 color visualization: http://colours.neilorangepeel.com/;
+- For all color: www.colorpicker.com;
+- HTML's INLINE CSS override ID's CSS override CLASS/ATTRIBUTE/PSUEDO-CLASS's CSS override TYPE's CSS override UNIVERSALx` *
+	Attribute's CSS example: input[type="text"] (select all attribute of type with "text" attribute)
+	Psuedo-class's CSS example: a:hover, input:checked;
+	Type's CSS examples: li, li a (target all anchor tag within <li>), li + a (target only the first anchor tag after <li>)
+- TEXT FONT: look at MDN font for full doc
+	font-family: set the font (Arial, Courier, ... ). fonts.google.com will work on every computer
+	font-size: 
+			px (16px by default),
+			em (equals to the size of the font applied to the parent of the element in question. Default parent is body/16px)
+			
+	font-weight: set the boldness of the font. Possible values: normal, bold, bolder, any integer between 100 - 900;
+	line-height: control the lines' spacing. Possible value: 2 (for double spacing), any integer. line height is determined by font ;
+	text-align: control the position of the text inside the padding. Possible value: left, right, center;	
+	text-decoration: underline, linethrough, solid, wavy, dashed, color of the decoration;
+- BOX MODEL - padding/border/margin
+	Syntax to change the width of element's content box inside padding: width: 50% or 200px or ... 
+	padding: space between border and content;
+	margin: space between border and other elements. Example: margin: 0 auto /*0px top and bottom, center element in the middle of the page 
+	Margin is on the outside of block elements while padding is on the inside.
+		- Use margin to separate the block from things outside it
+		- Use padding to move the contents away from the edges of the block.
+		- if your goal is to move the contents of the block inwards you would most likely rather use padding.
+	
+*/
