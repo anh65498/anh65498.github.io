@@ -49,7 +49,7 @@ var game = {}
 game.newGame = function(){
   resetGame()
   setupModeButton();
-  setupHintButton();
+  //setupHintButton();
   setupSquaresInteraction();
   //if user click reset button, generate new colors
   resetButton.addEventListener("click", function() {

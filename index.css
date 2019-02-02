@@ -1,7 +1,15 @@
+body, html {
+  height: 100%;
+}
 .wrapper{
-  padding-top: 100px;
+  padding-top: 10%;
 }
 
 .links {
-  padding-left: 500px;
+  padding-left: 33.33%;
+  font-size: 2em;
+}
+
+.links li {
+  margin: 10px 0px;
 }
