@@ -19,3 +19,6 @@ Go here: https://anh65498.github.io/Todo%20List/todo-list.html
 2. Hover over the date to change the date of the todo list
 3. Write tips for the "Tips" button.
 4. Pop up a tip box next to the Pencil icon to alert user about its feature.
+
+## Acknowledgement
+- Linda Ikechukwu - for her tutorial at https://medium.com/@Linda_Ikechukwu/building-a-to-do-list-app-with-vanilla-javascript-e27dda195fea
