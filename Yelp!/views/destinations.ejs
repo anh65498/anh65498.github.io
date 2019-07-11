@@ -1,0 +1,32 @@
+<%include partials/header.ejs%>
+<div class="container">
+  <header class="jumbotron">
+    <div class="container">
+      <h1>Welcome To YelpTravel!</h1>
+      <p>View all dreamy destinations</p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="/destinations/new">Add New Destination</a>
+      </p>
+    </div>
+  </header>
+
+  <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+      <% for (var dest of destinations){ %>
+        <div class="col-md-4 col-sm-6">
+          <div class="thumbnail">
+            <img src=<%=dest.img%> />
+            <div class="caption">
+              <h4><%=dest.name%></h4>
+              <p><%=dest.state%></p>
+            </div>
+          </div>
+        </div>
+      <% } %>
+
+  </div>
+
+
+
+  <a href="/">Back to homepage</a>
+</div>  <!-- end of "container"> -->
+<%include partials/footer.ejs%>

@@ -7,7 +7,9 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script> <!-- for sound -->
   <script type="text/javascript" src="lib/paperjs-v0/dist/paper-full.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <!-- <link rel="stylesheet" type="text/css" href="stylesheet.css"> -->
   <style media="screen">
+  * { margin: 0; padding: 0;}
     body, html {
     height: 100%;
     margin: 0;
@@ -15,9 +17,21 @@
   }
 
   canvas {
+    position:absolute;
     width: 100%;      /* expand canvas to cover the whole page */
+    height:100%;
     background: black;
   }
+
+
+  /* expand canvas to cover the whole page */
+  /* #c {
+      position:absolute;
+      width:100%;
+      height:100%;
+      background: black;
+  } */
+
   </style>
 
   <script type="text/paperscript" canvas="myCanvas">

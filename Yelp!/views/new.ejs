@@ -1,0 +1,31 @@
+<%include partials/header.ejs%>
+
+
+<!-- action's value must be the same as app.post()'s URL in backend app.js -->
+<div class="container">
+  <div class="row">
+    <h1>Create a New Entry</h1>
+
+    <div class="input-container">
+      <form class="form-horizontal" action="/destinations" method="post">
+        <div class="form-group">
+          <label for="nm">Name:</label>
+          <input type="text" class="form-control" name="destName" id="nm" placeholder="E.g: Yosemite Park">
+        </div>
+        <div class="form-group">
+          <label for="st">State:</label>
+          <input class="form-control" type="text" name="state" id ="st" placeholder="E.g: California">
+        </div>
+        <div class="form-group">
+          <label for="img">Image URL:</label>
+          <input class="form-control" type="text" name="img_url" id="img" placeholder="image url">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-info btn-sm btn-block">Submit</button>   <!-- btn-block expands the whole btn to parent's container -->
+        </div>  <!-- .form-group -->
+      </form>
+    </div>  <!-- .input-container -->
+
+  </div>  <!-- .row -->
+</div>    <!-- .container -->
+<%include partials/footer.ejs%>
