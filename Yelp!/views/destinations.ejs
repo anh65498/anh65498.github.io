@@ -1,4 +1,5 @@
 <%include partials/header.ejs%>
+
 <div class="container">
   <header class="jumbotron">
     <div class="container">
@@ -14,19 +15,15 @@
       <% for (var dest of destinations){ %>
         <div class="col-md-4 col-sm-6">
           <div class="thumbnail">
-            <img src=<%=dest.img%> />
+            <img src=<%=dest.image%> />
             <div class="caption">
               <h4><%=dest.name%></h4>
               <p><%=dest.state%></p>
+              <p><%=dest.country%></p>
             </div>
           </div>
         </div>
       <% } %>
-
   </div>
-
-
-
-  <a href="/">Back to homepage</a>
 </div>  <!-- end of "container"> -->
 <%include partials/footer.ejs%>
