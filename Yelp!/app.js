@@ -16,12 +16,16 @@ var destinationSchema = new mongoose.Schema({
   name: String,
   state: String,
   country: String,
-  image: String
+  image: String,
+  description: String
 })
 var Destination = mongoose.model("Destination", destinationSchema)    // create a new collection called destination in YelpTravel_destinations database
 
 // Destination.create({
-//   name: "Emerald Bay State Park", state: "California", image: "photos/emerald_bay.jpg", country: "USA"
+//   name: "Emerald Bay State Park",
+//   state: "California", image: "photos/emerald_bay.jpg",
+//   country: "United States of America",
+//   description: "Breathtaking bay surrounded by forest and hills. Kayak on the deep blue water and observe the sparkling ocean from the little island at the middle of the Bay."
 // }, function(err, dest) {
 //   if (err)
 //     console.log("Error adding new destination to Database: " + err)
@@ -46,8 +50,8 @@ app.get("/", (req, res) => {
   res.render("landing.ejs")
 })
 
+// INDEX Route: Get all campgrounds from Db and display them
 app.get("/destinations", (req, res) => {
-  // Get all campgrounds from Db
   Destination.find({}, (error, results) => {
     if (error)
       console.log("Error when retrieving destinations from database: " + error)
@@ -56,16 +60,18 @@ app.get("/destinations", (req, res) => {
   })
 })
 
-// Creating new destinations, same URL as 'get' method cuz REST
+// CREATE Route: Creating new destinations to Db, same URL as 'get' method cuz RESTFUL
 app.post("/destinations", (req, res) => {
   // Test: when user hits submit button, server will see this as proof that routing works
   // res.send("You hit the post route!!")
-  // get data from form and add to destinations array
   var newDest = {
           name: req.body.destName,
           state: req.body.state,
           country: req.body.country,
-          image: req.body.img_url}
+          image: req.body.img_url,
+          description: req.body.description}
+
+  // create a new destination in MongoDB
   Destination.create(newDest, (error, newlyCreated) => {
     if (error)
       console.log("Error when updating database: " + error)
@@ -77,8 +83,22 @@ app.post("/destinations", (req, res) => {
 
 })
 
-// Show Form to add new destination to database
+// NEW Route: Show Form to add new destination to database
 app.get("/destinations/new", (req, res) =>{
   res.render("new.ejs")
+})
+
+// SHOW route: show information of 1 destination
+app.get("/destinations/:id", (req, res) => {
+  // find the destination with provived ID
+  // id in the URL is the Mongo's ID for each destination. When user click "More info", they send the id along with the click
+  Destination.findById(req.params.id, (error, foundResult) =>{
+    if (error)
+      console.log("Error retrieving destination by ID from MongoDB. ")
+    else
+      res.render("show.ejs", {destination: foundResult})    // render page with that destination
+  })
+
+
 })
 app.listen(port, () => console.log(`Yelp App server is listening on port ${port}`))
