@@ -1,0 +1,14 @@
+<% for (var journal of journals){ %>
+    <div class="">
+      <h2><%= journal.dateCreated %></h2>
+      <p> <%= journal.completedTasks%></p>
+      <p> <%= journal.event%></p>
+      <p> <%= journal.note%></p>
+      <p> <%= journal.learn%></p>
+      <p> <%= journal.emotion%></p>
+      <p> <%= journal.celebration%></p> 
+      <p> <%= journal.goalTomorrow%></p>  
+      <p> <%= journal.habit%></p>
+      <p> <%= journal.habitStreak%></p>
+    </div>
+<%}%>
