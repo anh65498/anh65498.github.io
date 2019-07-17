@@ -47,6 +47,9 @@ app.get("/journals", (req, res) => {
   })
 })
 
+app.get("/journals/benefits", (req, res) => {
+  res.render("benefits.ejs")
+})
 
 // New Route: show new journal form
 app.get("/journals/new", (req, res) => {
@@ -76,4 +79,18 @@ app.get("/journals/:id", (req, res) => {
   })
 })
 
+// Edit Route: Show form to edit info about one specific journal
+app.get("/journals/:id/edit", (req, res) =>{
+  Journal.findById(req.params.id, (error, foundResult) => {
+    if (error)
+      res.redirect("/journals")
+    else
+      res.render("edit.ejs", { journal : foundResult})
+  })
+})
+
+// Update Route: When user click "submit" button in Edit page, this route is activated
+app.put("/journals/:id", (req, res) =>{
+  Journal.findByIdAndUpdate()
+})
 app.listen(port, () => console.log(`Journal App server is listening on port ${port}`))
