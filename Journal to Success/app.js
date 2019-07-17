@@ -34,7 +34,7 @@ var Journal = mongoose.model("Journal", journalSchema)  // create a new collecti
 // RESTful Routes
 // Landing page
 app.get("/", (req, res) => {
-  res.render("landing-page.ejs")
+  res.redirect("/journals")
 })
 
 // Index Route
@@ -47,6 +47,7 @@ app.get("/journals", (req, res) => {
   })
 })
 
+
 // New Route: show new journal form
 app.get("/journals/new", (req, res) => {
   res.render("new.ejs")
@@ -55,13 +56,23 @@ app.get("/journals/new", (req, res) => {
 // Create Route: Add new journal to database then redirect to homepage
 // is activated when user click "submit" in form
 app.post("/journals", (req, res) => {
-  // create new journal
+  // create new journal in database
   newJournal = req.body.journal
   Journal.create(newJournal, (error, retData) => {
     if (error)
       res.render("new.ejs")
     else
       res.redirect("/journals")
+  })
+})
+
+// Show Route: Show info about one specific journal
+app.get("/journals/:id", (req, res) => {
+  Journal.findById(req.params.id, (error, foundResult) => {
+    if (error)
+      res.redirect("/journals")
+    else
+      res.render("show.ejs", {journal: foundResult})
   })
 })
 
