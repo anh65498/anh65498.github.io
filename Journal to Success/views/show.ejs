@@ -15,6 +15,15 @@
         <p> <%= journal.habitStreak%></p>
         <p> <%= journal.note%></p>
       </div>  <!-- ./description -->
+
+      <!-- "Edit" button to edit entry.This hooks up to Entry route -->
+      <a class="ui brown basic button" href="/journals/<%= journal._id %>/edit">Edit</a>
+
+      <!-- "Delete" button to delete entry. Must be inside form to hook up to Delete route/method -->
+      <form id="delete-form" class="" action="/journals/<%= journal._id%>?_method=DELETE" method="POST">     <!-- send as post method to hide user's data and abide RESTful but actually when it reaches backend, it turns into DELETE method-->
+        <button  class="ui red basic button">Delete</button>
+      </form>
+
     </div>    <!-- ./item -->
   </div>
 </div>  <!-- ./ui main -->

@@ -2,7 +2,7 @@
 <div class="ui main text container segment">
   <div class="ui huge header">Edit <%= journal.dateCreated.toDateString() %> Journal</div>
 
-  <form class="ui form" action="/journals/:<%=journal._id %>" method="PUT">
+  <form class="ui form" action="/journals/<%=journal._id %>?_method=PUT" method="POST">    <!-- overwrite method from PUT to POST but still treated it as PUT for updating. Install npm package method-overrride -->
     <div class="field">
       <label>Completed Tasks</label>
       <input type="text" name="journal[completedTasks]" value="<%=journal.completedTasks%>">

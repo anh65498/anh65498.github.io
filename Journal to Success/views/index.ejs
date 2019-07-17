@@ -5,8 +5,6 @@
       <h2><%= journal.dateCreated %></h2>
       <p> <%= journal.completedTasks%></p>
       <p> <%= journal.goalTomorrow%></p>
-      <p> Habit: <%= journal.habit%> </p>
-      <p> Habit Streak:  <%= journal.habitStreak%> </p>
       <% if(journal.note && journal.note.length > 0) { %>   <!-- if user actually fill out note -->
         <p><%= journal.note.substring(0, 100)%>...</p>
       <% } %>
