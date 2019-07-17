@@ -1,0 +1,33 @@
+/* Color Scheme: close to nature - https://visme.co/blog/website-color-schemes/*/
+html {
+	height: 100%;		/* without this, there's a white space below the bckgr-img because body ends there. */
+	/* 100% of the webpage --> background-img cover 100% of page */
+}
+
+body {
+	font-family: 'Noto Serif TC', serif;
+	font-size: 20px;
+	font-weight: 600;
+	background-color: #F7F9FB;
+	color: #31708E;
+}
+
+i.icon {
+	font-size: 1.3em; 	/* double the size of parent's container */
+}
+.container-fluid {			/* navbar */
+	padding: 0;
+}
+
+.container {				/* contains the headers in navbar */
+
+}
+
+
+/******** BODY ************/
+
+
+/******** FOOTER ************/
+#footer-quote {
+	text-align: center;
+}
