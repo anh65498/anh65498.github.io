@@ -1,10 +1,11 @@
 /* Main backend for our Yelp app */
 const port        = 5000
 var express       = require("express"),
+    app           = express()
     bodyParser    = require("body-parser"),    // for Express's post method
-    mongoose      = require("mongoose")
+    mongoose      = require("mongoose"),
+    seedDB        = require("./seeds.js")    // clear all database and populate it with users. this file is at the same folder as app.js
 
-var app           = express()
 // tell Express to look inside "public" directory for CSS files
 app.use(express.static("public"))
 // tell Express to use body parser to parse client's request's information (like form's input)
@@ -14,7 +15,8 @@ mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParse
 // DB Schema setup - define data types of DB
 var Destination = require("./MongoDB_models/destination.js"),
     Comment     = require("./MongoDB_models/comment.js")
-
+// clear Db and populate it with fake destinations
+seedDB()
 
 // Destination.create({
 //   name: "Emerald Bay State Park",
@@ -76,7 +78,8 @@ app.get("/destinations/new", (req, res) =>{
 app.get("/destinations/:id", (req, res) => {
   // find the destination with provived ID
   // id in the URL is the Mongo's ID for each destination. When user click "More info", they send the id along with the click
-  Destination.findById(req.params.id, (error, foundResult) =>{
+  // use populate.exec() to translate the Comment's id to actual Comment in "Destination" db to display. inside foundResult, instead of Comments' id, there're be actual comments
+  Destination.findById(req.params.id).populate("comments").exec((error, foundResult) =>{
     if (error)
       console.log("Error retrieving destination by ID from MongoDB. ")
     else
