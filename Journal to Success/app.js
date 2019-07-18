@@ -3,7 +3,9 @@ var express       = require("express"),
     app           = express(),
     bodyParser    = require("body-parser"),     // to parse client's form to JS object
     mongoose      = require("mongoose"),         // for database
-    methodOverride = require("method-override")
+    methodOverride = require("method-override"), // interchange Update <-> Post to protect user data and abid to REST
+    expressSanitizer     = require("express-sanitizer")   // santizer user's input in form to prevent data corruption
+
 
 // tell Express to look inside "public" directory for CSS files
 app.use(express.static("public"))
@@ -11,6 +13,8 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended:true}));
 // tell Express to use method-override to
 app.use(methodOverride("_method"))
+// Mount express-sanitizer middleware here
+app.use(expressSanitizer());
 // create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/Journal_to_Success", { useNewUrlParser: true })
 // DB Schema setup - define data types of DB
@@ -66,6 +70,7 @@ app.get("/journals/new", (req, res) => {
 // is activated when user click "submit" in form
 app.post("/journals", (req, res) => {
   // create new journal in database
+  req.body.journal.note = req.sanitize(req.body.journal.note);    // remove any HTML <script> from user's input in journal[note]
   newJournal = req.body.journal
   Journal.create(newJournal, (error, retData) => {
     if (error)
@@ -99,6 +104,7 @@ app.get("/journals/:id/edit", (req, res) =>{
 // install method-override because with PUT method, add user's data is shown in URL.
 // Use method-override package to convert POST method from the form to PUT to hide user's data
 app.put("/journals/:id", (req, res) =>{
+  req.body.journal.note = req.sanitize(req.body.journal.note);    // remove any HTML <script> from user's input in journal[note]
   Journal.findByIdAndUpdate(req.params.id, req.body.journal, (error, updatedJournal) =>{
     // params: id, newData from URL (masked by POST method in form but actually it shows in PUT method), callback function
     if (error)

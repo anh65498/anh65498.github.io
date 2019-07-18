@@ -19,12 +19,15 @@ i.icon {
 	padding: 0;
 }
 
-.container {				/* contains the headers in navbar */
-
+.main.container {				/* avoid body container overlapping with */
+	margin-top: 4.0em;
 }
 
 
 /******** BODY ************/
+.description{
+	margin-bottom: 2em;
+}
 
 #delete-form{			/* since this is in <form>, <form> is block-element. Change to inline element. */
 	display: inline;

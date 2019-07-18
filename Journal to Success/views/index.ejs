@@ -1,16 +1,35 @@
 <% include ./partials/header.ejs %>
 
-<% for (var journal of journals){ %>
-    <div class="">
-      <h2><%= journal.dateCreated %></h2>
-      <p> <%= journal.completedTasks%></p>
-      <p> <%= journal.goalTomorrow%></p>
-      <% if(journal.note && journal.note.length > 0) { %>   <!-- if user actually fill out note -->
-        <p><%= journal.note.substring(0, 100)%>...</p>
-      <% } %>
+<div class="ui main text container">
+  <div class="ui huge header">Journal To Success</div>
+  <div class="ui top attached segment">
+    <div class="ui divided items">
+      <% for (var journal of journals){ %>
+          <div class="item">
+            <div class="content">
+              <a class="header" href="/journals/<%= journal._id %>"> <h2><%= journal.dateCreated.toDateString() %></h2> </a>
 
-      <a href="/journals/<%= journal._id %>">Read More</a>
-    </div>
-<%}%>
+              <div class="description">
+              <p>Completed: <%= journal.completedTasks%> </p>
+              <p>Tomorrow Goal: <%= journal.goalTomorrow%></p>
+              <% if(journal.note && journal.note.length > 0) { %>   <!-- if user actually fill out note -->
+                <p>Note: <%- journal.note.substring(0, 100)%>...</p>
+              <% } %>
+              </div> <!-- ./description -->
 
+              <div class="extra">
+                <a class="ui floated basic violet button" href="/journals/<%= journal._id %>">
+                  Read More <i class="right chevron icon"></i>
+                </a>
+              </div>    <!-- ./extra -->
+            </div>  <!-- ./content -->
+
+
+          </div>
+      <%}%>
+    </div> <!-- /.ui divided items -->
+  </div> <!-- ./ui top attached segment -->
+
+
+</div>  <!-- /.ui main text container -->
 <% include ./partials/footer.ejs %>
