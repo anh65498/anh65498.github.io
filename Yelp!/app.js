@@ -9,17 +9,12 @@ var app           = express()
 app.use(express.static("public"))
 // tell Express to use body parser to parse client's request's information (like form's input)
 app.use(bodyParser.urlencoded({extended:true}));
- // create Db inside mongoDB or use existing Db
+// create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParser: true })
 // DB Schema setup - define data types of DB
-var destinationSchema = new mongoose.Schema({
-  name: String,
-  state: String,
-  country: String,
-  image: String,
-  description: String
-})
-var Destination = mongoose.model("Destination", destinationSchema)    // create a new collection called destination in YelpTravel_destinations database
+var Destination = require("./MongoDB_models/destination.js"),
+    Comment     = require("./MongoDB_models/comment.js")
+
 
 // Destination.create({
 //   name: "Emerald Bay State Park",
@@ -33,17 +28,6 @@ var Destination = mongoose.model("Destination", destinationSchema)    // create 
 //     console.log("New destination was added to Database: " + dest)
 // })
 
-var destinations = [
-      { name: "Emerald Bay State Park", state: "California", img: "photos/emerald_bay.jpg"},
-      { name: "Disneyland", state:"California", img: "photos/disneyland.jpg"},
-      { name: "Santa Monica Beach", state:"California", img: "photos/santa_monica.jpg"},   // array of objects
-      { name: "Emerald Bay State Park", state: "California", img: "photos/emerald_bay.jpg"},
-      { name: "Santa Monica Beach", state:"California", img: "photos/santa_monica.jpg"},   // array of objects
-      { name: "Disneyland", state:"California", img: "photos/disneyland.jpg"},
-      { name: "Santa Monica Beach", state:"California", img: "photos/santa_monica.jpg"},   // array of objects
-      { name: "Emerald Bay State Park", state: "California", img: "photos/emerald_bay.jpg"},
-      { name: "Disneyland", state:"California", img: "photos/disneyland.jpg"},
-      { name: "Santa Monica Beach", state:"California", img: "photos/santa_monica.jpg"}]   // array of objects
 
 // HOMEPAGE
 app.get("/", (req, res) => {
