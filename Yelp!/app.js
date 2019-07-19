@@ -4,6 +4,12 @@ var express       = require("express"),
     app           = express()
     bodyParser    = require("body-parser"),    // for Express's post method
     mongoose      = require("mongoose"),
+    passport      = require("passport"),
+    LocalStrategy = require("passport-local")
+    // DB Schema setup - define data types of DB
+    Destination   = require("./MongoDB_models/destination.js"),
+    Comment       = require("./MongoDB_models/comment.js")
+    User          = require("./MongoDB_models/user.js")
     seedDB        = require("./seeds.js")    // clear all database and populate it with users. this file is at the same folder as app.js
 
 // tell Express to look inside "public" directory for CSS files
@@ -12,9 +18,7 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended:true}));
 // create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParser: true })
-// DB Schema setup - define data types of DB
-var Destination = require("./MongoDB_models/destination.js"),
-    Comment     = require("./MongoDB_models/comment.js")
+
 // clear Db and populate it with fake destinations
 seedDB()
 
@@ -74,14 +78,14 @@ app.get("/destinations/new", (req, res) =>{
   res.render("new.ejs")
 })
 
-// SHOW route: show information of 1 destination
+// SHOW route: show data and comments of 1 destination.
 app.get("/destinations/:id", (req, res) => {
   // find the destination with provived ID
   // id in the URL is the Mongo's ID for each destination. When user click "More info", they send the id along with the click
   // use populate.exec() to translate the Comment's id to actual Comment in "Destination" db to display. inside foundResult, instead of Comments' id, there're be actual comments
   Destination.findById(req.params.id).populate("comments").exec((error, foundResult) =>{
     if (error)
-      console.log("Error retrieving destination by ID from MongoDB. ")
+      cosole.log("Error retrieving destination by ID from MongoDB. ")
     else
       res.render("show.ejs", {destination: foundResult})    // render page with that destination
   })
