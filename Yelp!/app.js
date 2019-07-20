@@ -18,9 +18,8 @@ mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParse
 app.use(express.static("public"))
 // tell Express to use body parser to parse client's request's information (like form's input)
 app.use(bodyParser.urlencoded({extended:true}));
-
-// clear Db and populate it with fake destinations
-seedDB()
+// clear Db and populate it with fake destinations. If uncomment, Might run into error "Cannot read property 'name' of null  error" then see at the end.
+// seedDB()
 
 // Destination.create({
 //   name: "Emerald Bay State Park",
@@ -71,7 +70,8 @@ app.get("/destinations", (req, res) => {
 })
 
 // CREATE Route: Creating new destinations to Db, same URL as 'get' method cuz RESTFUL
-app.post("/destinations", (req, res) => {
+// isLoggedIn() is a middleware function that checked if user is logged in. If they are, render new.ejs. If not, redirect to /login
+app.post("/destinations", isLoggedIn, (req, res) => {
   // Test: when user hits submit button, server will see this as proof that routing works
   // res.send("You hit the post route!!")
   var newDest = {
@@ -93,7 +93,8 @@ app.post("/destinations", (req, res) => {
 })
 
 // NEW Route: Show Form to add new destination to database
-app.get("/destinations/new", (req, res) =>{
+// isLoggedIn() is a middleware function that checked if user is logged in. If they are, render new.ejs. If not, redirect to /login
+app.get("/destinations/new", isLoggedIn, (req, res) =>{
   res.render("new.ejs")
 })
 
