@@ -6,37 +6,69 @@ var Destination = require("./MongoDB_models/destination.js"),
 
 
 var data = [
-    {
-        name: "Disneyland",
-        image: "./photos/disneyland.jpg",
-        description: "Happiest place on Earth. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+  {
+    // "_id" : ObjectId("5d32b4d0fd13e359f9d0c594"),
+    "comments" : [ ],
+    "name" : "Emerald's Bay",
+    "state" : "Nevada", "country" : "United States of America",
+    "image" : "./photos/emerald_bay.jpg",
+    "description" : "Sparkling ocean water",
+    "author":
+        {
+          "id" : ("5d32b4b2fd13e359f9d0c593"),
+          "username": "zach"
+        },
+    "__v" : 0
+  },
+  {
+    // "_id" : ObjectId("5d32b46cfd13e359f9d0c590"),
+    "comments" : [ ],
+    "name" : "Disneyland",
+    "state" : "California", "country" : "United States of America",
+    "image" : "./photos/disneyland.jpg",
+    "description" : "Happiest place on Earth. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu smod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    "author" : {
+      "id" : ("5d32b454fd13e359f9d0c58f"),
+      "username" : "neel"
     },
-    {
-        name: "Santa Monica",
-        image: "./photos/santa_monica.jpg",
-        description: "Hottest beach in LA. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    },
-    {
-        name: "Emerald's Bay",
-        image: "./photos/emerald_bay.jpg",
-        description: "Sparkling ocean water"
-    },
-    {
-        name: "Cloud's Rest",
-        image: "https://farm4.staticflickr.com/3795/10131087094_c1c0a1c859.jpg",
-        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-    }
+    "__v" : 0
+  },
+  {
+    // "_id" : ObjectId("5d32b4a2fd13e359f9d0c592"),
+    "comments" : [ ],
+    "name" : "Santa Monica", "state" : "California",
+    "country" : "United States of America",
+    "image" : "./photos/santa_monica.jpg",
+    "description" : "Hottest beach in LA. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    "author" : {
+          "id" : ("5d32b48bfd13e359f9d0c591"),
+          "username" : "anh"
+        },
+    "__v" : 0
+  },
+  {
+    // "_id" : ObjectId("5d32b4e7fd13e359f9d0c595"),
+    "comments" :[ ],
+    "name" : "Cloud's Rest",
+    "state" : "None",
+    "country" :"United States of America",
+    "image" : "https://farm4.staticflickr.com/3795/10131087094_c1c0a1c859.jpg",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duisaute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    "author" :
+      { "id" : ("5d32b4b2fd13e359f9d0c593"),
+        "username" : "zach"
+      },
+    "__v" : 0
+  }
 ]
 
 function seedDB(){
   // Empty current YelpTravel_destinations database
-  Destination.remove({}, (error) => {
+  Destination.deleteMany({}, (error) => {
     if (error)
       console.log("Error when clearing file in seeds.js: " + error)
     else {
       console.log("Database is cleared succesfully")
-      // Remove all comment
-
       // Add some destinations to YelpTravel_destinations database from data list above
       for (var destination of data){
         Destination.create(destination, (error, retDest) => {
@@ -46,7 +78,10 @@ function seedDB(){
               // Create a comment
               Comment.create({
                 content: "This place is great, but I wish there was Internet.",
-                author: "Arthur"
+                author: {
+                  id: "5d32b4b2fd13e359f9d0c593",
+                  username: "zach"
+                }
               }, (error, retComment)=>{
                 if (error) console.log("Error creating new comment in seeds.js: " + error)
                 else {
