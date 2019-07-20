@@ -4,26 +4,35 @@
     <meta charset="utf-8">
     <title>Seeds!</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/header.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   </head>
   <body>
-
-    <div class="ui menu">
-      <div class="header item">
+    <div class="ui secondary menu">
+      <div class="header link item" href="./landing.ejs">
         Seeds
       </div>
-      <a class="item">
-        Add
-      </a>
-      <a class="item" href="/mentors">
+      
+      <a class="link item" href="/">
         Mentors
       </a>
-      <a class="item" href="/projects">
+      <a class="link item" href="/">
         Projects
       </a>
-      <a class="item" href="/events">
+      <a class="link item" href="/">
         Events
       </a>
+      <div class="item">
+        <div class="ui transparent icon input">
+          <input type="text" placeholder="Search...">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+      <div class="right menu">
+        <a class="item">
+          Add
+        </a>
+      </div>
     </div>

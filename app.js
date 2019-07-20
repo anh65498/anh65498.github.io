@@ -50,6 +50,8 @@ app.get("/mentors/new", (req, res) => {
 
 // CREATE: take input from users and
 
+// GET /style.css etc
+app.use(express.static(__dirname + '/public'));
 
 
 app.listen(port, () => console.log(`Seeds Server is listening on port ${port}`))
