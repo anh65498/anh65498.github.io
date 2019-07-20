@@ -28,9 +28,14 @@ app.get("/", (req, res) => {
   res.render("landing.ejs")
 })
 
-// Event page - Show a list of events
+// Event page - Show a list of events from MongoDB
 app.get("/events", (req, res) => {
-  res.render("events.ejs")
+  Event.find({}, (error, results) => {
+    if (error)
+      console.log("Error when retrieving destinations from database: " + error)
+    else
+      res.render("events.ejs", {events : results})
+  })
 })
 
 // Mentor page - Show mentors (Hall of Fame)
@@ -42,6 +47,8 @@ app.get("/mentors", (req, res) => {
 app.get("/projects", (req, res) => {
   res.render("projects.ejs")
 })
+
+
 
 
 

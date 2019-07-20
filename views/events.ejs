@@ -1,0 +1,33 @@
+<% include ./partials/header.ejs %>
+
+<div class="ui main text container">
+  <div class="ui huge header">Events</div>
+  <div class="ui top attached segment">
+    <div class="ui divided items">
+      <% for (var event of events){ %>
+          <div class="item">
+            <div class="content">
+              <a class="header" href="/events/<%= event._id %>"> <h2><%= event.name %></h2> </a>
+
+              <div class="description">
+                <p>Time: <%= event.time%> </p>
+                <p>Location: <%= event.location%></p>
+                <p>Description: <%= event.description.substring(0, 100)%>...</p>
+
+              <div class="extra">
+                <a class="ui floated basic violet button" href="/events/<%= event._id %>">
+                  Read More <i class="right chevron icon"></i>
+                </a>
+              </div>    <!-- ./extra -->
+            </div>  <!-- ./description -->
+          </div>  <!-- content -->
+          </div> <!-- /.item -->
+      <%}%>
+    </div>
+  </div> <!-- ./ui top attached segment -->
+
+
+</div>  <!-- /.ui main text container -->
+</div>
+
+<% include ./partials/footer.ejs %>
