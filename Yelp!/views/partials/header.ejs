@@ -45,9 +45,15 @@
         </form>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/login">Log In</a></li>
-          <li><a href="/register">Sign Up</a></li>
+          <% if (!currentUser){ %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Sign Up</a></li>
+          <% } else { %>
+            <li><a href="">Signed In As <%= currentUser.username %></a></li>
+            <li><a href="/logout">Logout</a></li>
+          <% } %>
         </ul> <!-- /.nav navbar-nav navbar-right -->
+
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
       </nav>

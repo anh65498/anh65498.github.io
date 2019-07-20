@@ -45,7 +45,10 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next()
+})  // whatever function is in use() will be called on every route
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
    next();
@@ -160,3 +163,9 @@ function isLoggedIn(req, res, next){
 
 
 app.listen(port, () => console.log(`Yelp App server is listening on port ${port}`))
+
+/*
+If you run into the Cannot read property 'name' of null  error, it's because now that we have the seeds function in app.js the campgrounds get deleted and recreated every time we start or restart the app.
+This means that, although they look the same, each campground has a brand new id in the database.
+If you want to avoid this error then you can either, comment out seedDB() in app.js or just be sure to go back to the campgrounds index page before going to any of the show pages.
+*/

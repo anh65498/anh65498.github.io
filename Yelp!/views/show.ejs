@@ -1,13 +1,25 @@
 <%include partials/header.ejs%>
 
-<h1> <%=destination.name%> </h1>
-<img src="<%destination.image%>">
-<p><%= destination.state%>, <%= destination.country%></p>
-<p><%= destination.description%></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="thumbnail">
+      <h1> <%=destination.name%> </h1>
+        <img class="img-responsive" src="<%= destination.image%>">
+        <div class="caption-full">
+          <h4 class="pull-right"><%= destination.state%>, <%= destination.country%></h4>
+          <p><%= destination.description%></p>
+        </div>
+      </div> <!-- ./thumbnail -->
 
-<!-- loop through all comments inside each destination post and display them -->
-<% for (var comment of destination.comments){ %>
-  <p><strong><%=comment.author %></strong></p>
-  <p><%=comment.content %></p>
-<% } %>
+      <!-- loop through all comments inside each destination post and display them -->
+      <% for (var comment of destination.comments){ %>
+        <p><strong><%=comment.author %></strong></p>
+        <p><%=comment.content %></p>
+      <% } %>
+    </div>  <!-- ./col-md-9 -->
+  </div>  <!-- ./row -->
+</div>    <!-- ./container -->
+
+
 <%include partials/footer.ejs%>
