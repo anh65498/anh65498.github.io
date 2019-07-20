@@ -1,1 +1,44 @@
-<h1>Form to create new women in Hall of Fame</h1>
+<% include partials/header.ejs %>
+
+<div class="ui main text container segment">
+  <div class="ui huge header">Become a Mentor Today! </div>
+
+  <form class="ui form" action="/mentors" method="POST">
+    <div class="field">
+      <label>Name: </label>
+      <input type="text" name="mentor[name]">
+    </div>
+
+    <div class="field">
+      <label>Skills: </label>
+      <input type="text" name="mentor[skills]">
+    </div>
+
+    <div class="field">
+      <label>Experience: </label>
+      <textarea name="mentor[experience]" rows="4" cols="50" ></textarea>
+    </div>
+
+    <div class="field">
+      <label>Projects: </label>
+      <textarea name="mentor[projects]" rows="4" cols="50" ></textarea>
+    </div>
+
+    <div class="field">
+      <label>Work place: </label>
+      <textarea name="mentor[company]" rows="4" cols="50"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Avatar Photo Link(Smile :]): </label>
+      <input type="text" name="mentor[cover-img]">
+    </div>
+
+
+
+
+    <button class="ui big blue basic button">Submit</button>
+  </form>
+</div>
+
+<% include partials/footer.ejs %>

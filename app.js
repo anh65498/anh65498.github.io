@@ -35,7 +35,7 @@ app.get("/projects", (req, res) => {
 // ==========================================
 // USER ROUTES (only user can access these)
 // ==========================================
-// SHOW FORMS: to create new projects, events, women
+// SHOW FORMS: to create new a project, event, and mentor
 app.get("/projects/new", (req, res) =>{
   res.render("new_project.ejs")
 })
