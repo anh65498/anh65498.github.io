@@ -12,12 +12,12 @@ var express       = require("express"),
     User          = require("./MongoDB_models/user.js")
     seedDB        = require("./seeds.js")    // clear all database and populate it with users. this file is at the same folder as app.js
 
+// create Db inside mongoDB or use existing Db
+mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParser: true })
 // tell Express to look inside "public" directory for CSS files
 app.use(express.static("public"))
 // tell Express to use body parser to parse client's request's information (like form's input)
 app.use(bodyParser.urlencoded({extended:true}));
-// create Db inside mongoDB or use existing Db
-mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParser: true })
 
 // clear Db and populate it with fake destinations
 seedDB()
@@ -33,6 +33,23 @@ seedDB()
 //   else
 //     console.log("New destination was added to Database: " + dest)
 // })
+
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+    secret: "Once again Rusty wins cutest dog!",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   next();
+});
 
 
 // HOMEPAGE
@@ -70,7 +87,6 @@ app.post("/destinations", (req, res) => {
       res.redirect("/destinations")
     }
   })
-
 })
 
 // NEW Route: Show Form to add new destination to database
@@ -89,7 +105,58 @@ app.get("/destinations/:id", (req, res) => {
     else
       res.render("show.ejs", {destination: foundResult})    // render page with that destination
   })
-
-
 })
+
+// =================
+// AUTH ROUTES
+// =================
+
+// show register form
+app.get("/register", function(req, res){
+   res.render("register.ejs");
+});
+//handle sign up logic
+app.post("/register", function(req, res){
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register.ejs");
+        }
+        passport.authenticate("local")(req, res, function(){
+           res.redirect("/destinations");
+        });
+    });
+});
+
+// SHOW login form
+app.get("/login", function(req, res){
+   res.render("login.ejs");
+});
+
+// handling login logic
+// Params: route, middleware, cbf
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/destinations",
+        failureRedirect: "/login"
+    }), function(req, res){
+});
+
+
+// Logout logic route
+app.get("/logout", function(req, res){
+   req.logout();
+   res.redirect("/destinations");
+});
+
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
+
+
 app.listen(port, () => console.log(`Yelp App server is listening on port ${port}`))
