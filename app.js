@@ -6,6 +6,8 @@ var express         = require("express"),
     mongoose        = require("mongoose"),         // for database
     // DB Schema setup - define data types of DB
     Mentor          = require("./MongoDB_models/mentor.js")
+    Event           = require("./MongoDB_models/event.js")
+
 
 // create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/Seeds_Women_Networking", { useNewUrlParser: true })
@@ -62,6 +64,59 @@ app.get("/mentors/new", (req, res) => {
 
 // CREATE: take input from FORMS and inject them to database
 app.post("/mentors", (req, res) =>{
+  // console.log(req);
+  var newMentor = {
+            name: req.body.mentor.name,
+            skills: req.body.mentor.skills,
+            experience: req.body.mentor.experience,
+            company: req.body.mentor.company,
+            projects: req.body.mentor.projects,
+            cover_img: req.body.mentor.cover_img,
+            // author: {
+            //   id: req.user._id,
+            //   username: req.user.username
+            // }
+          }
+    // console.log(newMentor)
+    // create a new mentor in "mentors" collection of MongoDB
+    Mentor.create(newMentor, (error, newlyCreated) => {
+      if (error)
+        console.log("Error when updating mentor's database: " + error)
+      else{
+        // redirect back to FORM page of 'get' request
+        // console.log(newMentor)
+        res.redirect("/mentors")
+      }
+    })
+} )
+
+app.post("/events", (req, res) =>{
+  // console.log(req);
+  var newEvent = {
+            name: req.body.event.name,
+            date: req.body.event.date,
+            time: req.body.event.time,
+            location: req.body.event.location,
+            description: req.body.event.description,
+            // author: {
+            //   id: req.user._id,
+            //   username: req.user.username
+            // }
+          }
+    // console.log(newMentor)
+    // create a new event in "events" collection of MongoDB
+    Event.create(newEvent, (error, newlyCreated) => {
+      if (error)
+        console.log("Error when updating event's database: " + error)
+      else{
+        // redirect back to FORM page of 'get' request
+        // console.log(newMentor)
+        res.redirect("/events")
+      }
+    })
+} )
+
+app.post("/projects", (req, res) =>{
   // console.log(req);
   var newMentor = {
             name: req.body.mentor.name,
