@@ -5,9 +5,9 @@ var express         = require("express"),
     bodyParser      = require("body-parser"),
     mongoose        = require("mongoose"),         // for database
     // DB Schema setup - define data types of DB
-    Mentor          = require("./MongoDB_models/mentor.js")
-    Event           = require("./MongoDB_models/event.js")
-
+    Mentor          = require("./MongoDB_models/mentor.js"),
+    Event           = require("./MongoDB_models/event.js"),
+    Project         = require("./MongoDB_models/project.js")
 
 // create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/Seeds_Women_Networking", { useNewUrlParser: true })
@@ -118,13 +118,12 @@ app.post("/events", (req, res) =>{
 
 app.post("/projects", (req, res) =>{
   // console.log(req);
-  var newMentor = {
-            name: req.body.mentor.name,
-            skills: req.body.mentor.skills,
-            experience: req.body.mentor.experience,
-            company: req.body.mentor.company,
-            projects: req.body.mentor.projects,
-            cover_img: req.body.mentor.cover_img,
+  var newProject = {
+            name: req.body.project.name,
+            description: req.body.project.description,
+            cover_img: req.body.project.cover_img,
+            author: req.body.project.author,
+            tools: req.body.project.tools,
             // author: {
             //   id: req.user._id,
             //   username: req.user.username
@@ -132,13 +131,13 @@ app.post("/projects", (req, res) =>{
           }
     // console.log(newMentor)
     // create a new mentor in "mentors" collection of MongoDB
-    Mentor.create(newMentor, (error, newlyCreated) => {
+    Project.create(newProject, (error, newlyCreated) => {
       if (error)
-        console.log("Error when updating mentor's database: " + error)
+        console.log("Error when updating project's database: " + error)
       else{
         // redirect back to FORM page of 'get' request
         // console.log(newMentor)
-        res.redirect("/mentors")
+        res.redirect("/projects")
       }
     })
 } )
