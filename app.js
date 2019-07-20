@@ -10,7 +10,8 @@ var express         = require("express"),
 // create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/Seeds_Women_Networking", { useNewUrlParser: true })
 // tell Express to look inside "public" directory for CSS files
-app.use(express.static("public"))
+// app.use(express.static("public"))          // mine
+app.use(express.static(__dirname + '/public')); // Rachel
 // tell Express to use body parser to parse client's request's information (like form's input)
 app.use(bodyParser.urlencoded({extended:true}));
 // clear Db and populate it with fake destinations. If uncomment, Might run into error "Cannot read property 'name' of null  error" then see at the end.
@@ -58,6 +59,7 @@ app.get("/mentors/new", (req, res) => {
   res.render("new_mentor.ejs")
 })
 
+
 // CREATE: take input from FORMS and inject them to database
 app.post("/mentors", (req, res) =>{
   // console.log(req);
@@ -85,6 +87,5 @@ app.post("/mentors", (req, res) =>{
       }
     })
 } )
-
 
 app.listen(port, () => console.log(`Seeds Server is listening on port ${port}`))
