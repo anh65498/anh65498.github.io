@@ -76,20 +76,20 @@ function seedDB(){
             else{
               console.log("Added a Destination.")
               // Create a comment
-              Comment.create({
-                content: "This place is great, but I wish there was Internet.",
-                author: {
-                  id: "5d32b4b2fd13e359f9d0c593",
-                  username: "zach"
-                }
-              }, (error, retComment)=>{
-                if (error) console.log("Error creating new comment in seeds.js: " + error)
-                else {
-                  retDest.comments.push(retComment)
-                  retDest.save()
-                  console.log("Create 1 new comment!")
-                }
-              })
+              // Comment.create({
+              //   content: "This place is great, but I wish there was Internet.",
+              //   author: {
+              //     id: "5d32b4b2fd13e359f9d0c593",
+              //     username: "zach"
+              //   }
+              // }, (error, retComment)=>{
+              //   if (error) console.log("Error creating new comment in seeds.js: " + error)
+              //   else {
+              //     retDest.comments.push(retComment)
+              //     retDest.save()
+              //     console.log("Create 1 new comment!")
+              //   }
+              // })
             }
           })
         }

@@ -3,6 +3,9 @@ h1, h3 {
   text-align: center;
 }
 
+.jumbotron {
+  text-align: center
+}
 .input-container {
   width: 30%;       /* make <input> smaller */
   margin: 50px auto;
@@ -10,6 +13,8 @@ h1, h3 {
 
 .thumbnail img {
     width: 100%;
+    object-fit: cover;
+    height: 300px;
 }
 
 .thumbnail {
