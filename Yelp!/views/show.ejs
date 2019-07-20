@@ -5,10 +5,13 @@
     <div class="col-md-9">
       <div class="thumbnail">
       <h1> <%=destination.name%> </h1>
-        <img class="img-responsive" src="<%= destination.image%>">
+        <img class="img-responsive" src=<%=destination.image %>>
         <div class="caption-full">
           <h4 class="pull-right"><%= destination.state%>, <%= destination.country%></h4>
           <p><%= destination.description%></p>
+          <p>
+            <em>Submitted by <%= destination.author.username%>
+          </p>
         </div>
       </div> <!-- ./thumbnail -->
 

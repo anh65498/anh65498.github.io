@@ -5,6 +5,13 @@ var destinationSchema = new mongoose.Schema({
   country: String,
   image: String,
   description: String,
+  author: {       // only author of the post can edit/remove it
+    id: {   // id of user in "users" collection
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    username: String
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId, // each comment is a reference to

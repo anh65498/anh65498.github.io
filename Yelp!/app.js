@@ -79,7 +79,12 @@ app.post("/destinations", isLoggedIn, (req, res) => {
           state: req.body.state,
           country: req.body.country,
           image: req.body.img_url,
-          description: req.body.description}
+          description: req.body.description,
+          author: {
+            id: req.user._id,
+            username: req.user.username
+          }
+        }
 
   // create a new destination in MongoDB
   Destination.create(newDest, (error, newlyCreated) => {
@@ -154,7 +159,7 @@ app.get("/logout", function(req, res){
    res.redirect("/destinations");
 });
 
-
+// isLoggedIn() is a middleware function that checked if user is logged in. If they are, render new.ejs. If not, redirect to /login
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
