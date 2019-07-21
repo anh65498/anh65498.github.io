@@ -10,3 +10,18 @@ p {
     color: #616283;
 }
 
+.header {
+    font-size: 30px;
+}
+
+a.link.item {
+    font-size: 20px;
+}
+
+a.item {
+   font-size: 15px; 
+}
+
+.ui[class*="top fixed"].menu {
+    margin-bottom: 30%;
+}
