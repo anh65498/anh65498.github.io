@@ -1,12 +1,17 @@
 <% include ./partials/header.ejs %>
-
+<% var counter = 0 %>
 <link rel="stylesheet" type="text/css" href="/mentor.css">
 
 <div class="ui text container">
     <h1>Mentors</h1>
     <div class="ui two column grid">
         <!-- Row Start -->
-        <div class="row">
+        <% for (var mentor of mentors){ %>
+        <% counter += 1 %>
+        <% if (counter % 2 != 0) {%>
+            <div class="row">
+        <% } %>
+        <!-- <div class="row"> -->
             <!-- Card Start -->
             <div class="column">
                 <div class="ui card">
@@ -14,14 +19,14 @@
                         <img src="/kristy.png">
                     </div>
                     <div class="content">
-                        <a class="header">Kristy Lee</a>
+                        <a class="header"><%=mentor.name %></a>
                         <div class="meta">
                             <i class="briefcase icon"></i>
-                            <span>Software Engineer at Gooogle</span>
+                            <span><%=mentor.company %></span>
                             <br>
                             <i class="pencil alternate icon"></i>
-                            <span>HTML, CSS, JS, Python, C++, Java</span>
-                
+                            <span><%=mentor.skills %></span>
+
                         </div>
                         <h4 class="ui sub header">Projects</h4>
                         <div class="ui small feed">
@@ -35,7 +40,7 @@
                             <div class="event">
                                 <div class="content">
                                     <div class="summary">
-                                        <a>Pokedex App</a>
+                                        <a><%=mentor.projects %></a>
                                     </div>
                                 </div>
                             </div>
@@ -49,151 +54,17 @@
                         </div>
                     </div>
             </div>
-        </div>  
+        </div>
+        <% if (counter % 2 == 0) {%>
+          <% console.log(counter) %>
+          </div>          <!-- Row End -->
+        <% } %>
         <!-- Card Finish -->
+        <% } %>
 
-                    <!-- Card Start -->
-                    <div class="column">
-                        <div class="ui card">
-                            <div class="image">
-                                <img src="/kristy.png">
-                            </div>
-                            <div class="content">
-                                <a class="header">Kristy Lee</a>
-                                <div class="meta">
-                                    <i class="briefcase icon"></i>
-                                    <span>Software Engineer at Gooogle</span>
-                                    <br>
-                                    <i class="pencil alternate icon"></i>
-                                    <span>HTML, CSS, JS, Python, C++, Java</span>
-                    
-                                </div>
-                                <h4 class="ui sub header">Projects</h4>
-                                <div class="ui small feed">
-                                    <div class="event">
-                                        <div class="content">
-                                            <div class="summary">
-                                                <a>Personal Website</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="event">
-                                        <div class="content">
-                                            <div class="summary">
-                                                <a>Pokedex App</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="description">
-                                                                            Kristy is an art director living in New York.
-                                                                        </div> -->
-                                </div>
-                                <div class="ui bottom attached button">
-                                    <i class="add icon"></i>
-                                    Add Friend
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card Finish -->
 
-    </div>
-    <!-- Row End -->
 
-            <!-- Row Start -->
-            <div class="row">
-                <!-- Card Start -->
-                <div class="column">
-                    <div class="ui card">
-                        <div class="image">
-                            <img src="/kristy.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Kristy Lee</a>
-                            <div class="meta">
-                                <i class="briefcase icon"></i>
-                                <span>Software Engineer at Gooogle</span>
-                                <br>
-                                <i class="pencil alternate icon"></i>
-                                <span>HTML, CSS, JS, Python, C++, Java</span>
-            
-                            </div>
-                            <h4 class="ui sub header">Projects</h4>
-                            <div class="ui small feed">
-                                <div class="event">
-                                    <div class="content">
-                                        <div class="summary">
-                                            <a>Personal Website</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="event">
-                                    <div class="content">
-                                        <div class="summary">
-                                            <a>Pokedex App</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <div class="description">
-                                                                    Kristy is an art director living in New York.
-                                                                </div> -->
-                            </div>
-                            <div class="ui bottom attached button">
-                                <i class="add icon"></i>
-                                Add Friend
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Finish -->
-            
-                <!-- Card Start -->
-                <div class="column">
-                    <div class="ui card">
-                        <div class="image">
-                            <img src="/kristy.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Kristy Lee</a>
-                            <div class="meta">
-                                <i class="briefcase icon"></i>
-                                <span>Software Engineer at Gooogle</span>
-                                <br>
-                                <i class="pencil alternate icon"></i>
-                                <span>HTML, CSS, JS, Python, C++, Java</span>
-            
-                            </div>
-                            <h4 class="ui sub header">Projects</h4>
-                            <div class="ui small feed">
-                                <div class="event">
-                                    <div class="content">
-                                        <div class="summary">
-                                            <a>Personal Website</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="event">
-                                    <div class="content">
-                                        <div class="summary">
-                                            <a>Pokedex App</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <div class="description">
-                                                                                        Kristy is an art director living in New York.
-                                                                                    </div> -->
-                            </div>
-                            <div class="ui bottom attached button">
-                                <i class="add icon"></i>
-                                Add Friend
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Finish -->
-            
-            </div>
-            <!-- Row End -->
+
 </div>
 </div>
 

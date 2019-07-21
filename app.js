@@ -8,6 +8,7 @@ var express         = require("express"),
     Mentor          = require("./MongoDB_models/mentor.js"),
     Event           = require("./MongoDB_models/event.js"),
     Project         = require("./MongoDB_models/project.js")
+    seedDB        = require("./seeds.js")
 
 // create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/Seeds_Women_Networking", { useNewUrlParser: true })
@@ -17,7 +18,7 @@ app.use(express.static(__dirname + '/public')); // Rachel
 // tell Express to use body parser to parse client's request's information (like form's input)
 app.use(bodyParser.urlencoded({extended:true}));
 // clear Db and populate it with fake destinations. If uncomment, Might run into error "Cannot read property 'name' of null  error" then see at the end.
-// seedDB()
+seedDB()
 
 
 // ==========================================
@@ -32,7 +33,7 @@ app.get("/", (req, res) => {
 app.get("/events", (req, res) => {
   Event.find({}, (error, results) => {
     if (error)
-      console.log("Error when retrieving destinations from database: " + error)
+      console.log("Error when retrieving events from database: " + error)
     else
       res.render("events.ejs", {events : results})
   })
@@ -40,12 +41,23 @@ app.get("/events", (req, res) => {
 
 // Mentor page - Show mentors (Hall of Fame)
 app.get("/mentors", (req, res) => {
-  res.render ("mentors.ejs")
+    Mentor.find({}, (error, results) => {
+    if (error)
+      console.log("Error when retrieving projects from database: " + error)
+    else
+      res.render("mentors.ejs", {mentors : results})
+  })
 })
 
 // Project page - Show projects
 app.get("/projects", (req, res) => {
-  res.render("projects.ejs")
+  Project.find({}, (error, results) => {
+    if (error)
+      console.log("Error when retrieving projects from database: " + error)
+    else{
+      res.render("projects.ejs", {projects : results})
+    }
+  })
 })
 
 

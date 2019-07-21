@@ -8,195 +8,46 @@
         <!-- Row Start -->
         <div class="row">
             <!-- Card Start -->
-            <div class="column">
-                <div class="ui card">
-                    <div class="image">
-                        <img src="/kristy.png">
-                    </div>
-                    <div class="content">
-                        <a class="header">Seeds</a>
-                        <div class="meta">
-                            <i class="user icon"></i>
-                            <span>Ivy He, Rachel Quan, Anh Pham</span>
-                            <br>
-                            <i class="code icon"></i>
-                            <span>HTML, CSS, JS, Python, C++, Java</span>
+            <% for (var project of projects){ %>
+              <div class="column">
+                  <div class="ui card">
+                      <div class="image">
+                          <img src="/kristy.png">     <!-- CHANGE HERE -->
+                      </div>
+                      <div class="content">
+                          <a class="header"><%= project.name%></a>
+                          <div class="meta">
+                              <i class="user icon"></i>
+                              <span><%= project.author%></span>
+                              <br>
+                              <i class="code icon"></i>
+                              <span><%= project.tools%></span>
 
-                        </div>
-                        
-                        <div class="description">
-                            Seeds is a full-stack website that aims to cultivate a network of talented women.
-                        </div>
-                    </div>
-                        <div class="ui bottom attached button">
-                            <i class="add icon"></i>
-                            Join Project
-                        </div>
-                    </div>
-                </div>
-            <!-- Card Finish -->
+                          </div>
 
-                <!-- Card Start -->
-                <div class="column">
-                    <div class="ui card">
-                        <div class="image">
-                            <img src="/kristy.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Seeds</a>
-                            <div class="meta">
-                                <i class="user icon"></i>
-                                <span>Ivy He, Rachel Quan, Anh Pham</span>
-                                <br>
-                                <i class="code icon"></i>
-                                <span>HTML, CSS, JS, Python, C++, Java</span>
-                
-                            </div>
-                
-                            <div class="description">
-                                Seeds is a full-stack website that aims to cultivate a network of talented women.
-                            </div>
-                        </div>
-                        <div class="ui bottom attached button">
-                            <i class="add icon"></i>
-                            Join Project
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Finish -->
+                          <div class="description"><%= project.description%></div>
+                      </div>
+                          <div class="ui bottom attached button">
+                              <i class="add icon"></i>
+                              Join Project
+                          </div>
+                      </div>
+                  </div>
+              <!-- Card Finish -->
+              <% } %>
 
-                <!-- Card Start -->
-                <div class="column">
-                    <div class="ui card">
-                        <div class="image">
-                            <img src="/kristy.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Seeds</a>
-                            <div class="meta">
-                                <i class="user icon"></i>
-                                <span>Ivy He, Rachel Quan, Anh Pham</span>
-                                <br>
-                                <i class="code icon"></i>
-                                <span>HTML, CSS, JS, Python, C++, Java</span>
-                
-                            </div>
-                
-                            <div class="description">
-                                Seeds is a full-stack website that aims to cultivate a network of talented women.
-                            </div>
-                        </div>
-                        <div class="ui bottom attached button">
-                            <i class="add icon"></i>
-                            Join Project
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Finish -->
+            </div>    <!-- Row End -->
 
-                </div>
 
-                        <!-- Row Start -->
-                        <div class="row">
-                            <!-- Card Start -->
-                            <div class="column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="/kristy.png">
-                                    </div>
-                                    <div class="content">
-                                        <a class="header">Seeds</a>
-                                        <div class="meta">
-                                            <i class="user icon"></i>
-                                            <span>Ivy He, Rachel Quan, Anh Pham</span>
-                                            <br>
-                                            <i class="code icon"></i>
-                                            <span>HTML, CSS, JS, Python, C++, Java</span>
-                        
-                                        </div>
-                        
-                                        <div class="description">
-                                            Seeds is a full-stack website that aims to cultivate a network of talented women.
-                                        </div>
-                                    </div>
-                                    <div class="ui bottom attached button">
-                                        <i class="add icon"></i>
-                                        Join Project
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Finish -->
-                        
-                            <!-- Card Start -->
-                            <div class="column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="/kristy.png">
-                                    </div>
-                                    <div class="content">
-                                        <a class="header">Seeds</a>
-                                        <div class="meta">
-                                            <i class="user icon"></i>
-                                            <span>Ivy He, Rachel Quan, Anh Pham</span>
-                                            <br>
-                                            <i class="code icon"></i>
-                                            <span>HTML, CSS, JS, Python, C++, Java</span>
-                        
-                                        </div>
-                        
-                                        <div class="description">
-                                            Seeds is a full-stack website that aims to cultivate a network of talented women.
-                                        </div>
-                                    </div>
-                                    <div class="ui bottom attached button">
-                                        <i class="add icon"></i>
-                                        Join Project
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Finish -->
-                        
-                            <!-- Card Start -->
-                            <div class="column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="/kristy.png">
-                                    </div>
-                                    <div class="content">
-                                        <a class="header">Seeds</a>
-                                        <div class="meta">
-                                            <i class="user icon"></i>
-                                            <span>Ivy He, Rachel Quan, Anh Pham</span>
-                                            <br>
-                                            <i class="code icon"></i>
-                                            <span>HTML, CSS, JS, Python, C++, Java</span>
-                        
-                                        </div>
-                        
-                                        <div class="description">
-                                            Seeds is a full-stack website that aims to cultivate a network of talented women.
-                                        </div>
-                                    </div>
-                                    <div class="ui bottom attached button">
-                                        <i class="add icon"></i>
-                                        Join Project
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Finish -->
-                        
-                        </div>
-                                <!-- Row End -->
+    </div>
 
-            </div>
 
-          
 
-        </div>
+</div>
 
-        
 
-        
+
+
     </div>
 </div>
 

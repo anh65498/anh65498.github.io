@@ -1,8 +1,9 @@
 // run this to empty current database and "seed" database with some users
 
 var mongoose = require("mongoose");
-// var Destination = require("./MongoDB_models/destination.js"),
-//     Comment   = require("./MongoDB_models/comment");
+var Mentor = require("./MongoDB_models/mentor.js"),
+    Event   = require("./MongoDB_models/event.js"),
+    Project   = require("./MongoDB_models/project.js");
 
 var mentorData = [
   {
@@ -122,6 +123,41 @@ function seedDB(){
             if (error) console.log(error)
             else{
               console.log("Added a Mentor.")
+            }
+          })
+        }
+    }
+  })
+
+    Event.deleteMany({}, (error) => {
+        if (error)
+          console.log("Error when clearing file in seeds.js: " + error)
+        else {
+          console.log("Database is cleared succesfully")
+          // Add some destinations to database from data list above
+          for (var e of eventData){
+            Event.create(e, (error, retDest) => {
+                if (error) console.log(error)
+                else{
+                  console.log("Added an Event.")
+                }
+              })
+            }
+        }
+      })
+
+Project.deleteMany({}, (error) => {
+    if (error)
+      console.log("Error when clearing file in seeds.js: " + error)
+    else {
+      console.log("Database is cleared succesfully")
+      // Add some destinations to database from data list above
+      for (var project of projectData){
+        Mentor.create(project, (error, retDest) => {
+            if (error) console.log(error)
+            else{
+              console.log("Added a Project.")
+              // console.log(project)
             }
           })
         }
