@@ -81,7 +81,7 @@ var projectData = [
     "name" : "Data Analysis and Machine Learning Projects",
     "description" : "Collection of teaching materials, code, and data for my data analysis and machine learning projects.",
     "tools" : "Python, Jupyter Notebook",
-    "cover-img" : "./photos/ml.jpg",
+    "cover_img" : "./photos/project.jpg",
     "author" : "Jenny"
   },
   {
@@ -89,7 +89,7 @@ var projectData = [
     "name" : "React Projects",
     "description" : "Web applications and websites designed with React",
     "tools" : "React",
-    "cover-img" : "./photos/react.jpg",
+    "cover_img" : "./photos/project.jpg",
     "author" : "Nicole"
   },
   {
@@ -97,7 +97,7 @@ var projectData = [
     "name" : "AI Projects",
     "description" : "Artificial Intelligence projects, documentation and code",
     "tools" : "Python",
-    "cover-img" : "./photos/ai.jpg",
+    "cover_img" : "./photos/project.jpg",
     "author" : "Will"
   },
   {
@@ -105,7 +105,7 @@ var projectData = [
     "name" : "iOS Projects",
     "description" : "Class projects about iOS development and interface design",
     "tools" : "Swift",
-    "cover-img" : "./photos/swift.jpg",
+    "cover_img" : "./photos/project.jpg",
     "author" : "Annie"
   }
 ]
@@ -153,7 +153,7 @@ Project.deleteMany({}, (error) => {
       console.log("Database is cleared succesfully")
       // Add some destinations to database from data list above
       for (var project of projectData){
-        Mentor.create(project, (error, retDest) => {
+        Project.create(project, (error, retDest) => {
             if (error) console.log(error)
             else{
               console.log("Added a Project.")

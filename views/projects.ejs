@@ -1,18 +1,21 @@
 <% include ./partials/header.ejs %>
-
+<% var counter = 0 %>
 <!-- <link rel="stylesheet" type="text/css" href="/projects.css"> -->
 
 <div class="ui text container">
     <h1>Projects</h1>
     <div class="ui three column grid">
         <!-- Row Start -->
-        <div class="row">
+        <% for (var project of projects){ %>
+          <% counter += 1 %>
+          <% if (counter % 2 != 0) {%>
+              <div class="row">
+          <% } %>
             <!-- Card Start -->
-            <% for (var project of projects){ %>
               <div class="column">
                   <div class="ui card">
                       <div class="image">
-                          <img src="/kristy.png">     <!-- CHANGE HERE -->
+                          <img src=<%- project.cover_img%>>     <!-- CHANGE HERE -->
                       </div>
                       <div class="content">
                           <a class="header"><%= project.name%></a>
@@ -25,7 +28,7 @@
 
                           </div>
 
-                          <div class="description"><%= project.description%></div>
+                          <div class="description"><%= project.description%> </div>
                       </div>
                           <div class="ui bottom attached button">
                               <i class="add icon"></i>
@@ -34,21 +37,15 @@
                       </div>
                   </div>
               <!-- Card Finish -->
+
+
+              <% if (counter % 2 == 0) {%>
+                <% console.log(counter) %>
+                </div>          <!-- Row End -->
               <% } %>
-
-            </div>    <!-- Row End -->
-
-
+                <% } %>
     </div>
 
-
-
-</div>
-
-
-
-
-    </div>
 </div>
 
 
