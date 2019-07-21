@@ -54,7 +54,7 @@ var eventData = [
   },
   {
     // "_id" : ObjectId("5d32b46cfd13e359f9d0c590"),
-    "name" : "Twilio Customer & Developer Conference",
+    "name" : "Twilio Customer & Dev. Conference",
     "date" : "2019-08-06",
     "time" : "09:00:00",
     "location" : "Moscone West, 800 Howard Street, San Francisco, CA 94107"

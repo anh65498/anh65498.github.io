@@ -1,9 +1,10 @@
 // Script to set up server in Express
-const port          = 8080
+// const port          = 8080
 var express         = require("express"),
     app             = express(),
     bodyParser      = require("body-parser"),
     mongoose        = require("mongoose"),         // for database
+
     // DB Schema setup - define data types of DB
     Mentor          = require("./MongoDB_models/mentor.js"),
     Event           = require("./MongoDB_models/event.js"),
@@ -11,7 +12,7 @@ var express         = require("express"),
     seedDB        = require("./seeds.js")
 
 // create Db inside mongoDB or use existing Db
-mongoose.connect("mongodb://localhost/Seeds_Women_Networking", { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Seeds_Women_Networking", { useNewUrlParser: true })
 // tell Express to look inside "public" directory for CSS files
 // app.use(express.static("public"))          // mine
 app.use(express.static(__dirname + '/public')); // Rachel
@@ -161,4 +162,7 @@ app.post("/projects", (req, res) =>{
     })
 } )
 
-app.listen(port, () => console.log(`Seeds Server is listening on port ${port}`))
+
+// app.listen(port, () => console.log(`Seeds Server is listening on port ${port}`))
+const port = process.env.PORT || 3000;
+app.listen(port);
