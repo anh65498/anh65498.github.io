@@ -1,0 +1,21 @@
+.headingText {
+    margin-top: 10%;
+    margin-bottom: 30%;
+}
+
+.landingImg {
+    margin-top: -55%;
+}
+
+body {
+    overflow-y: hidden; 
+    overflow-x: hidden; 
+}
+
+button {
+    color: #459CD1;
+}
+
+.header {
+    font-size: 30px;
+}
