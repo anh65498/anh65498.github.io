@@ -1,47 +1,31 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<% include ./partials/header.ejs %>
 
-<head>
-    <meta charset="utf-8">
-    <title>Seeds</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="/header.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-</head>
-
-<body>
-
-<link rel="stylesheet" type="text/css" href="/landing.css">
-    <div class="ui secondary menu sticky ">
-        <div class="header link item">
-            <a href="/">Seeds</a>
-        </div>
+<link rel="stylesheet" type="text/css" href="/stylesheets/landing.css">
 
 
-
+<div class="ui items">
+  <div class="item" style="user-select: auto;">
+    <div class="content" id="content" style="user-select: auto;">
+      <div class="header" style="user-select: auto;">Cultivate your network in tech.</div>
+      <div class="meta" style="user-select: auto;">
+        <span class="price" style="user-select: auto;">For college students, interns and professionals</span>
+      </div>
+      <div class="description" id="description" style="user-select: auto;">
+        <p>At Seeds, we help you find mentors to guide you career-wise, connect you wih talents around the world who share the same passion in tech as you do or going to networking events hosted by companies.</p>
+        <button class="ui blue button" value="Mentors"><a style="color: white" href="/mentors">Mentors</a></button>
+        <button class="ui blue button" value="Events"><a style="color: white" href="/events">Events</a></button>
+        <button class="ui blue button" value="Projects"><a style="color: white" href="/projects">Projects</a></button>
+      </div>
     </div>
-
-<div class="ui left-aligned container">
-    <div class="headingText">
-        <h1>Cultivate your network of women in tech.</h1>
-
-        <p>Connect with talented women around the world who share the same passion with tech as you do.</p>
-
-        <button class="ui blue button" value="Mentors"><a style="color: white"><a href="/mentors">Mentors</a></button>
-        <button class="ui blue button" value="Events"><a style="color: white"><a href="/events">Events</a></button>
-        <button class="ui blue button" value="Projects"><a style="color: white"><a href="/projects">Projects</a></button>
+    <div class="ui large image" style="user-select: auto;">
+      <img src="/landing-img.jpg" style="user-select: auto;">
     </div>
+  </div>    <!-- /.item -->
+</div>      <!-- /.ui items headingText -->
 
 
 
 
 
-        <img class="ui large right floated image landingImg" src="/landing-img.jpg">
-    </div>
-
-</div>
 
 <% include ./partials/footer.ejs %>

@@ -1,0 +1,15 @@
+/* NAV BAR */
+.menu .item{                          /*  Mentors, Events, Project  */
+    font-size: 1.25em;
+}
+
+.item .input {                        /* hide search bar in navbar */
+   display: none !important;
+}
+
+#brand-name {
+  display: inline !important;
+  font-size: 1.75em;
+}
+
+/* CONTENT */

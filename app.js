@@ -1,5 +1,4 @@
 // Script to set up server in Express
-// const port          = 8080
 var express         = require("express"),
     app             = express(),
     bodyParser      = require("body-parser"),
@@ -162,7 +161,10 @@ app.post("/projects", (req, res) =>{
     })
 } )
 
+// For localhost
+const port          = 8080
+app.listen(port, () => console.log(`Seeds Server is listening on port ${port}`))
 
-// app.listen(port, () => console.log(`Seeds Server is listening on port ${port}`))
-const port = process.env.PORT || 3000;
-app.listen(port);
+// For heroku
+// const port = process.env.PORT || 3000;
+// app.listen(port);
