@@ -1,6 +1,6 @@
 # Seeds
 
-Women Networking Sites for college students, interns and professionals.
+Networking Website for College Students, Interns and Professionals.
 
 https://glacial-caverns-19674.herokuapp.com
 
