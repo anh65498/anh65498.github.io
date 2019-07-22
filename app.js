@@ -162,9 +162,9 @@ app.post("/projects", (req, res) =>{
 } )
 
 // For localhost
-const port          = 8080
-app.listen(port, () => console.log(`Seeds Server is listening on port ${port}`))
+// const port          = 8080
+// app.listen(port, () => console.log(`Seeds Server is listening on port ${port}`))
 
 // For heroku
-// const port = process.env.PORT || 3000;
-// app.listen(port);
+const port = process.env.PORT || 3000;
+app.listen(port);
