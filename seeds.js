@@ -50,11 +50,12 @@ var eventData = [
     "name" : "Spectra Hackathon",
     "date" : "2019-07-20",
     "time" : "08:30:00",
-    "location" : "Make School, 555 Post St, San Francisco, CA 94102"
+    "location" : "Make School, 555 Post St, San Francisco, CA 94102",
+    "description": "Spectra is an all-women hackathon that promotes innovation in Health."
   },
   {
     // "_id" : ObjectId("5d32b46cfd13e359f9d0c590"),
-    "name" : "Twilio Customer & Dev. Conference",
+    "name" : "Twilio Customer & Developer Conference",
     "date" : "2019-08-06",
     "time" : "09:00:00",
     "location" : "Moscone West, 800 Howard Street, San Francisco, CA 94107"

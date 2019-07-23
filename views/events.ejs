@@ -5,28 +5,37 @@
   <div class="ui top attached segment">
     <div class="ui divided items">
       <% for (var event of events){ %>
-          <div class="item">
-            <div class="content">
-                            <img class="ui medium right floated image" src="/events.jpg">
-
+        <div class="item" style="user-select: auto;">
+          <div class="content" style="user-select: auto;">
+            <div class="header" style="user-select: auto;">
               <a class="header" href="/events/<%= event._id %>"> <h2><%= event.name %></h2> </a>
+            </div>
+            <div class="meta" style="user-select: auto;">
+              <span class="price" style="user-select: auto;"><%= event.time%></span>
+              <span class="stay" style="user-select: auto;">@ <%= event.location%></span>
+            </div>
+            <div class="bottom aligned description" style="user-select: auto;">
+              <% if(event.description && event.description.length > 0) { %>
+                <p>Description: <%- event.description.substring(0, 200)%></p>
+              <% } %>
 
-              <div class="description">
-                <p>Time: <%= event.time%> </p>
-                <p>Location: <%= event.location%></p>
-                <% if(event.note && event.description.length > 0) { %>
-                  <p>Description: <%- event.description.substring(0, 50)%></p>
-                <% } %>
-              <div class="extra">
+              </div>  <!-- ./description -->
+              <div class="extra" style="user-select: auto;">
                 <a class="ui floated basic violet button" href="/events/<%= event._id %>">
                   Read More <i class="right chevron icon"></i>
                 </a>
                 <a class="ui floated basic violet button" href="#>">
                   RSVP <i class="right chevron icon"></i>
-                </a>              </div>    <!-- ./extra -->
-            </div>  <!-- ./description -->
-          </div>  <!-- content -->
-          </div> <!-- /.item -->
+                </a>
+              </div>
+
+          </div>    <!-- ./content -->
+
+          <div class="ui medium image" style="user-select: auto;">
+            <img src="/events.jpg" style="user-select: auto;">
+          </div>
+        </div>    <!-- ./item -->
+
       <%}%>
     </div>
   </div> <!-- ./ui top attached segment -->

@@ -1,3 +1,7 @@
+/* body {
+  background-color: black;
+} */
+
 /* NAV BAR */
 .menu .item{                          /*  Mentors, Events, Project  */
     font-size: 1.25em;
@@ -13,3 +17,17 @@
 }
 
 /* CONTENT */
+.description {
+  height: 100px;
+}
+
+.description>p{
+  font-size: 1.2em;
+  padding-top: 0.5em;
+}
+
+.ui.items>.item .extra {        /* RSVP and Read more */}
+
+.ui.items>.item .extra>* {                    /* RSVP and Read more */
+  margin-right: 3em;
+}
