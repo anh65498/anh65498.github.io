@@ -34,7 +34,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());           // reading the session, encode and decode data from session (method of passportLocalMongoose)
 passport.deserializeUser(User.deserializeUser());       // reading the session, encode and decode data from session (method of passportLocalMongoose)
 app.use(function(req, res, next){
-  res.locals.currentUser = req.user;
+  res.locals.currentUser = req.user;      // whatever variable comes after res.locals will be available inside our ejs file that is in next. Next is the code block that in the routes
   next()
 })  // whatever function is in use() will be called on every route, because every route has navbar and we want to show username on it when user logs in
 

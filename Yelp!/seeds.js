@@ -11,7 +11,7 @@ var data = [
     "comments" : [ ],
     "name" : "Emerald's Bay",
     "state" : "Nevada", "country" : "United States of America",
-    "image" : "./photos/emerald_bay.jpg",
+    "image" : "/photos/emerald_bay.jpg",
     "description" : "Sparkling ocean water",
     "author":
         {
@@ -25,7 +25,7 @@ var data = [
     "comments" : [ ],
     "name" : "Disneyland",
     "state" : "California", "country" : "United States of America",
-    "image" : "./photos/disneyland.jpg",
+    "image" : "/photos/disneyland.jpg",
     "description" : "Happiest place on Earth. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu smod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     "author" : {
       "id" : ("5d32b454fd13e359f9d0c58f"),
@@ -38,7 +38,7 @@ var data = [
     "comments" : [ ],
     "name" : "Santa Monica", "state" : "California",
     "country" : "United States of America",
-    "image" : "./photos/santa_monica.jpg",
+    "image" : "/photos/santa_monica.jpg",
     "description" : "Hottest beach in LA. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     "author" : {
           "id" : ("5d32b48bfd13e359f9d0c591"),
@@ -78,7 +78,7 @@ function seedDB(){
               // Create a comment
               Comment.create({
                 content: "This place is great, but I wish there was Internet.",
-                author: "Zach" 
+                author: "Zach"
               }, (error, retComment)=>{
                 if (error) console.log("Error creating new comment in seeds.js: " + error)
                 else {
