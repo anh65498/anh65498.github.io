@@ -1,57 +1,43 @@
 /* Main backend for our Yelp app */
 const port        = 5000
 var express       = require("express"),
-    app           = express()
+    app           = express(),
     bodyParser    = require("body-parser"),    // for Express's post method
     mongoose      = require("mongoose"),
     passport      = require("passport"),
-    LocalStrategy = require("passport-local")
+    LocalStrategy = require("passport-local"),
     // DB Schema setup - define data types of DB
     Destination   = require("./MongoDB_models/destination.js"),
-    Comment       = require("./MongoDB_models/comment.js")
-    User          = require("./MongoDB_models/user.js")
+    Comment       = require("./MongoDB_models/comment.js"),
+    User          = require("./MongoDB_models/user.js"),
     seedDB        = require("./seeds.js")    // clear all database and populate it with users. this file is at the same folder as app.js
 
 // create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParser: true })
 // tell Express to look inside "public" directory for CSS files
-app.use(express.static("public"))
+app.use(express.static(__dirname + "/public"))    // __dirname is the directory app.css is located
 // tell Express to use body parser to parse client's request's information (like form's input)
 app.use(bodyParser.urlencoded({extended:true}));
 // clear Db and populate it with fake destinations. If uncomment, Might run into error "Cannot read property 'name' of null  error" then see at the end.
 seedDB()
 
-// Destination.create({
-//   name: "Emerald Bay State Park",
-//   state: "California", image: "photos/emerald_bay.jpg",
-//   country: "United States of America",
-//   description: "Breathtaking bay surrounded by forest and hills. Kayak on the deep blue water and observe the sparkling ocean from the little island at the middle of the Bay."
-// }, function(err, dest) {
-//   if (err)
-//     console.log("Error adding new destination to Database: " + err)
-//   else
-//     console.log("New destination was added to Database: " + dest)
-// })
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "Once again Rusty wins cutest dog!",
+    secret: "I am super competitive in beer pong!",
     resave: false,
     saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser());           // reading the session, encode and decode data from session (method of passportLocalMongoose)
+passport.deserializeUser(User.deserializeUser());       // reading the session, encode and decode data from session (method of passportLocalMongoose)
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
   next()
-})  // whatever function is in use() will be called on every route
-app.use(function(req, res, next){
-   res.locals.currentUser = req.user;
-   next();
-});
+})  // whatever function is in use() will be called on every route, because every route has navbar and we want to show username on it when user logs in
+
 
 
 // HOMEPAGE
@@ -122,7 +108,7 @@ app.get("/destinations/:id", (req, res) => {
 //             COMMENT ROUTES
 // =============================================
 // NEW route: Show form to create a new comment attached to a destination post
-app.get("/destinations/:id/comments/new", (req, res) =>{
+app.get("/destinations/:id/comments/new", isLoggedIn, (req, res) =>{
   // find destination by id from db to pass destination's data to the form
   Destination.findById(req.params.id, (error, retDestination) => {
     if (error) console.log("Error getting destination by ID in comment route: " + error)
@@ -132,7 +118,8 @@ app.get("/destinations/:id/comments/new", (req, res) =>{
 })
 
 // CREATE route: Create a new comment then attach it to a destination post
-app.post("/destinations/:id/comments", (req, res) =>{
+// Need to be protected from people sending post request via POSTMAN by isLoggedIn()
+app.post("/destinations/:id/comments", isLoggedIn, (req, res) =>{
   // lookup destination using ID
   Destination.findById(req.params.id, (error, foundDestination) =>{
     if (error) console.log("Error finding Destination in DB when creating new comment in DB")
@@ -162,21 +149,22 @@ app.post("/destinations/:id/comments", (req, res) =>{
 app.get("/register", function(req, res){
    res.render("register.ejs");
 });
+
 //handle sign up logic
 app.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
+    let newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             console.log(err);
             return res.render("register.ejs");
         }
-        passport.authenticate("local")(req, res, function(){
+        passport.authenticate("local")(req, res, function(){    // local is the  strategy
            res.redirect("/destinations");
         });
     });
 });
 
-// SHOW login form
+// NEW Route: Show login form for user to log in
 app.get("/login", function(req, res){
    res.render("login.ejs");
 });
@@ -185,7 +173,7 @@ app.get("/login", function(req, res){
 // Params: route, middleware, cbf
 app.post("/login", passport.authenticate("local",
     {
-        successRedirect: "/destinations",
+        successRedirect: "/destinations",     // if user log in succesfully, redirect to /destinations
         failureRedirect: "/login"
     }), function(req, res){
 });
@@ -197,7 +185,8 @@ app.get("/logout", function(req, res){
    res.redirect("/destinations");
 });
 
-// isLoggedIn() is a middleware function that checked if user is logged in. If they are, render new.ejs. If not, redirect to /login
+// isLoggedIn() is a middleware function that checked if user is logged in.
+// If they are, continue with the code after it is called. If not, redirect to /login
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();

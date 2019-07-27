@@ -6,6 +6,6 @@ var userSchema = new mongoose.Schema({
   password: String
 })
 
-userSchema.plugin(passportLocalMongoose)
+userSchema.plugin(passportLocalMongoose)    // add methods of passportLocalMongoose to userSchema 
 
 module.exports = mongoose.model("User", userSchema)

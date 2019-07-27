@@ -6,12 +6,13 @@ h1, h3 {
 .jumbotron {
   text-align: center
 }
+
 .input-container {
   width: 30%;       /* make <input> smaller */
   margin: 50px auto;
 }
 
-.thumbnail img {
+.thumbnail img {      /* make image spans 100% of container thumbnail */
     width: 100%;
     object-fit: cover;
     height: 300px;
@@ -21,6 +22,10 @@ h1, h3 {
     padding: 0;
 }
 
-.thumbnail .caption-full {
-    padding: 9px;
+.thumbnail .caption {
+    padding: 10px;
+}
+
+#footer {
+  text-align: center;
 }

@@ -2,27 +2,46 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-md-3">
+      <p class="lead">YelpTravel!</p>   <!-- lead makes a paragraph stand out -->
+        <ul class="list-group">
+          <li class="list-group-item active">Category 1</li>
+          <li class="list-group-item">Category 2</li>
+          <li class="list-group-item">Category 3</li>
+        </ul>
+    </div>  <!-- ./col-md-3 -->
     <div class="col-md-9">
       <div class="thumbnail">
       <h1> <%=destination.name%> </h1>
-        <img class="img-responsive" src=<%=destination.image%> />
-        <div class="caption-full">
-          <h4 class="pull-right"><%= destination.state%>, <%= destination.country%></h4>
+        <img src=<%=destination.image%> />
+        <div class="caption">
+          <h4 class="pull-right"><%= destination.country%></h4>
+          <h4><%= destination.state%></h4>
           <p><%= destination.description%></p>
           <p style="text-transform: capitalize">
             <em>Submitted by <%= destination.author.username%></em>
           </p>
-          <p>
-            <a class="btn btn-success" href="/destinations/<%= destination._id%>/comments/new">Add New Comment</a>
-          </p>
         </div>
       </div> <!-- ./thumbnail -->
+      <div class="well">
+        <div class="text-right">
+            <a class="btn btn-success" href="/destinations/<%= destination._id%>/comments/new">Add New Comment</a>
+        </div>
+        <!-- loop through all comments inside each destination post and display them -->
+        <% for (var comment of destination.comments){ %>
+          <div class="row">
+            <div class="col-md-12">
+              <span class="pull-right">10 days ago</span>
+              <p><strong><%=comment.author %></strong></p>
+              <p><%=comment.content %></p>
+            </div>
+          </div>  <!-- ./row -->
+        <% } %>
 
-      <!-- loop through all comments inside each destination post and display them -->
-      <% for (var comment of destination.comments){ %>
-        <p><strong><%=comment.author %></strong></p>
-        <p><%=comment.content %></p>
-      <% } %>
+      </div>  <!-- ./well -->
+
+
+
     </div>  <!-- ./col-md-9 -->
   </div>  <!-- ./row -->
 </div>    <!-- ./container -->
