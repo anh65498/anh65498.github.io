@@ -69,6 +69,13 @@ app.get("/destinations", (req, res) => {
   })
 })
 
+// NEW Route: Show Form to add new destination to database
+// isLoggedIn() is a middleware function that checked if user is logged in. If they are, render new.ejs. If not, redirect to /login
+app.get("/destinations/new", isLoggedIn, (req, res) =>{
+  res.render("new_destination.ejs")
+})
+
+
 // CREATE Route: Creating new destinations to Db, same URL as 'get' method cuz RESTFUL
 // isLoggedIn() is a middleware function that checked if user is logged in. If they are, render new.ejs. If not, redirect to /login
 app.post("/destinations", isLoggedIn, (req, res) => {
@@ -88,8 +95,7 @@ app.post("/destinations", isLoggedIn, (req, res) => {
 
   // create a new destination in MongoDB
   Destination.create(newDest, (error, newlyCreated) => {
-    if (error)
-      console.log("Error when updating database: " + error)
+    if (error)  console.log("Error when updating database: " + error)
     else{
       // redirect back to /destinations page of 'get' request
       res.redirect("/destinations")
@@ -97,28 +103,60 @@ app.post("/destinations", isLoggedIn, (req, res) => {
   })
 })
 
-// NEW Route: Show Form to add new destination to database
-// isLoggedIn() is a middleware function that checked if user is logged in. If they are, render new.ejs. If not, redirect to /login
-app.get("/destinations/new", isLoggedIn, (req, res) =>{
-  res.render("new.ejs")
-})
-
 // SHOW route: show data and comments of 1 destination.
 app.get("/destinations/:id", (req, res) => {
   // find the destination with provived ID
   // id in the URL is the Mongo's ID for each destination. When user click "More info", they send the id along with the click
-  // use populate.exec() to translate the Comment's id to actual Comment in "Destination" db to display. inside foundResult, instead of Comments' id, there're be actual comments
-  Destination.findById(req.params.id).populate("comments").exec((error, foundResult) =>{
+  // use populate.exec() to translate the Comment's id to actual Comment in "Destination" db to display.
+  // Inside foundDestination, instead of Comments' id, there're be actual comments
+  Destination.findById(req.params.id).populate("comments").exec((error, foundDestination) =>{
     if (error)
       cosole.log("Error retrieving destination by ID from MongoDB. ")
     else
-      res.render("show.ejs", {destination: foundResult})    // render page with that destination
+      res.render("show.ejs", {destination: foundDestination})    // render page with that destination
   })
 })
 
-// =================
-// AUTH ROUTES
-// =================
+
+// =============================================
+//             COMMENT ROUTES
+// =============================================
+// NEW route: Show form to create a new comment attached to a destination post
+app.get("/destinations/:id/comments/new", (req, res) =>{
+  // find destination by id from db to pass destination's data to the form
+  Destination.findById(req.params.id, (error, retDestination) => {
+    if (error) console.log("Error getting destination by ID in comment route: " + error)
+    else
+      res.render("new_comment.ejs", {destination : retDestination})
+  })
+})
+
+// CREATE route: Create a new comment then attach it to a destination post
+app.post("/destinations/:id/comments", (req, res) =>{
+  // lookup destination using ID
+  Destination.findById(req.params.id, (error, foundDestination) =>{
+    if (error) console.log("Error finding Destination in DB when creating new comment in DB")
+    else {
+      //create new comment
+      Comment.create(req.body.comment, (error, newlyCreated) =>{
+        if (error) console.log("Error adding new comment to database")
+        else {
+          // connect new comment to destination and save this change to DB
+          foundDestination.comments.push(newlyCreated)
+          foundDestination.save();
+          // redirect to destination post
+          res.redirect("/destinations/" + foundDestination._id)
+        }
+      })
+    }
+  })
+})
+
+
+
+// =============================================
+//                  AUTH ROUTES
+// =============================================
 
 // show register form
 app.get("/register", function(req, res){
@@ -171,7 +209,9 @@ function isLoggedIn(req, res, next){
 app.listen(port, () => console.log(`Yelp App server is listening on port ${port}`))
 
 /*
-If you run into the Cannot read property 'name' of null  error, it's because now that we have the seeds function in app.js the campgrounds get deleted and recreated every time we start or restart the app.
-This means that, although they look the same, each campground has a brand new id in the database.
-If you want to avoid this error then you can either, comment out seedDB() in app.js or just be sure to go back to the campgrounds index page before going to any of the show pages.
+If you run into the Cannot read property 'name' of null  error, it's because now that we have the seeds function in app.js,
+ the destinations get deleted and recreated every time we start or restart the app.
+This means that, although they look the same, each destination has a brand new id in the database.
+If you want to avoid this error then you can either, comment out seedDB() in app.js
+or just be sure to go back to the destination index page before going to any of the show pages.
 */
