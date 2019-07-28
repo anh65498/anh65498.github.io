@@ -138,6 +138,14 @@ app.put("/destinations/:id", (req, res)=>{
   })
 })
 
+// DESTROY route: delete destination post (triggered by "Delete" button on show page)
+app.use("/destinations/:id", (req, res)=>{
+  Destination.findByIdAndRemove(req.params.id, (error) =>{
+    if (error) res.redirect("/")
+    else
+      res.redirect("/destinations/")
+  })
+})
 // =============================================
 //             COMMENT ROUTES
 // =============================================

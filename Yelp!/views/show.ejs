@@ -21,9 +21,13 @@
           <p style="text-transform: capitalize">
             <em>Submitted by <%= destination.author.username%></em>
           </p>
-          <div class="text-left">
-              <a class="btn btn-warning" href="/destinations/<%= destination._id%>/edit">Edit post</a>
+          <div id="button" class="text-left" >
+              <a class="btn btn-warning" href="/destinations/<%= destination._id%>/edit">Edit</a>
           </div>
+          <!-- Form that is shown as a button to delete post -->
+          <form id="button" action="/destinations/<%=destination._id%>?_method=DELETE" method="post">
+            <button class="btn btn-danger" name="button">Delete</button>
+          </form>
         </div>
       </div> <!-- ./thumbnail -->
       <div class="well">

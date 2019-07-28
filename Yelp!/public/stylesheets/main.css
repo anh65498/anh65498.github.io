@@ -37,6 +37,10 @@ h1, h3 {
     padding: 10px;
 }
 
+#button{
+  display: inline;
+}
+
 #footer {
   text-align: center;
 }
