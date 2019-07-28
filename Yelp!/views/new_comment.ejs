@@ -8,11 +8,6 @@
     <div class="input-container">
       <form class="form-horizontal" action="/destinations/<%=destination._id%>/comments" method="post">
         <div class="form-group">
-          <label for="au">Author:</label>
-          <input id="au" type="text" class="form-control" name="comment[author]" placeholder="Anh">   <!--  use comment[author] s.t. Comment.create(req.body.comment, ... is possible -->
-        </div>
-
-        <div class="form-group">
           <label for="cm">Comment:</label>
           <textarea id="cm" class="form-control" name="comment[content]" rows="4" cols="80"></textarea>
         </div>

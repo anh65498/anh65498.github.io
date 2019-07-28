@@ -65,32 +65,32 @@ var data = [
 function seedDB(){
   // Empty current YelpTravel_destinations database
   Destination.deleteMany({}, (error) => {
-    if (error)
-      console.log("Error when clearing file in seeds.js: " + error)
-    else {
-      console.log("Database is cleared succesfully")
-      // Populate  YelpTravel_destinations database from data list above
-      for (var destination of data){
-        Destination.create(destination, (error, retDest) => {
-            if (error) console.log(error)
-            else{
-              console.log("Added a Destination.")
-              // Create a comment
-              Comment.create({
-                content: "This place is great, but I wish there was Internet.",
-                author: "Zach"
-              }, (error, retComment)=>{
-                if (error) console.log("Error creating new comment in seeds.js: " + error)
-                else {
-                  retDest.comments.push(retComment)
-                  retDest.save()
-                  console.log("Create 1 new comment!")
-                }
-              })
-            }
-          })
-        }
-    }
+    // if (error)
+    //   console.log("Error when clearing file in seeds.js: " + error)
+    // else {
+    //   console.log("Database is cleared succesfully")
+    //   // Populate  YelpTravel_destinations database from data list above
+    //   for (var destination of data){
+    //     Destination.create(destination, (error, retDest) => {
+    //         if (error) console.log(error)
+    //         else{
+    //           console.log("Added a Destination.")
+    //           // Create a comment
+    //           Comment.create({
+    //             content: "This place is great, but I wish there was Internet.",
+    //             author: "Zach"
+    //           }, (error, retComment)=>{
+    //             if (error) console.log("Error creating new comment in seeds.js: " + error)
+    //             else {
+    //               retDest.comments.push(retComment)
+    //               retDest.save()
+    //               console.log("Create 1 new comment!")
+    //             }
+    //           })
+    //         }
+    //       })
+    //     }
+    // }
   })
 
 

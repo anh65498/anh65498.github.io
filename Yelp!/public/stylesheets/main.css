@@ -1,4 +1,8 @@
 /* CSS of YelpTravel! */
+body {
+  text-transform: capitalize;
+}
+
 h1, h3 {
   text-align: center;
 }

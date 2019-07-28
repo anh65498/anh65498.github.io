@@ -34,7 +34,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());           // reading the session, encode and decode data from session (method of passportLocalMongoose)
 passport.deserializeUser(User.deserializeUser());       // reading the session, encode and decode data from session (method of passportLocalMongoose)
 app.use(function(req, res, next){
-  res.locals.currentUser = req.user;      // whatever variable comes after res.locals will be available inside our ejs file that is in next. Next is the code block that in the routes
+  res.locals.currentUser = req.user;      // whatever variable comes after res.locals will be available inside next. Next is the code block that in the routes
   next()
 })  // whatever function is in use() will be called on every route, because every route has navbar and we want to show username on it when user logs in
 
@@ -47,11 +47,11 @@ app.get("/", (req, res) => {
 
 // INDEX Route: Get all campgrounds from Db and display them
 app.get("/destinations", (req, res) => {
-  Destination.find({}, (error, results) => {
+  Destination.find({}, (error, retDestinations) => {
     if (error)
       console.log("Error when retrieving destinations from database: " + error)
     else
-      res.render("destinations.ejs", {destinations : results})
+      res.render("destinations.ejs", {destinations : retDestinations})
   })
 })
 
@@ -128,6 +128,13 @@ app.post("/destinations/:id/comments", isLoggedIn, (req, res) =>{
       Comment.create(req.body.comment, (error, newlyCreated) =>{
         if (error) console.log("Error adding new comment to database")
         else {
+          // console.log(newlyCreated)      // { _id: 5d3cca1a17b446055dbb215b, content: 'fdfs', __v: 0 }
+          // console.log(req.user)   // { _id: 5d32b48bfd13e359f9d0c591, username: 'anh', __v: 0 }
+          // add current user's username (req.user.username) and id to comment
+          newlyCreated.author.id        = req.user._id;    // Comment.author.id because of our Comment's schema
+          newlyCreated.author.username  = req.user.username;
+          //save comment in DB
+          newlyCreated.save();
           // connect new comment to destination and save this change to DB
           foundDestination.comments.push(newlyCreated)
           foundDestination.save();
