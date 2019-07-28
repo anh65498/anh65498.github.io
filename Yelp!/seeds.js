@@ -2,8 +2,8 @@
 // Purpose: auto. generate example content to see how are application looks like and performs
 var mongoose = require("mongoose");
 var Destination = require("./MongoDB_models/destination.js"),
-    Comment   = require("./MongoDB_models/comment");
-
+    Comment     = require("./MongoDB_models/comment"),
+    User        = require("./MongoDB_models/user.js")
 
 var data = [
   {
@@ -63,34 +63,39 @@ var data = [
 ]
 
 function seedDB(){
+  // Delete all comments
+  Comment.deleteMany({}, (error) => {})
   // Empty current YelpTravel_destinations database
   Destination.deleteMany({}, (error) => {
-    // if (error)
-    //   console.log("Error when clearing file in seeds.js: " + error)
-    // else {
-    //   console.log("Database is cleared succesfully")
-    //   // Populate  YelpTravel_destinations database from data list above
-    //   for (var destination of data){
-    //     Destination.create(destination, (error, retDest) => {
-    //         if (error) console.log(error)
-    //         else{
-    //           console.log("Added a Destination.")
-    //           // Create a comment
-    //           Comment.create({
-    //             content: "This place is great, but I wish there was Internet.",
-    //             author: "Zach"
-    //           }, (error, retComment)=>{
-    //             if (error) console.log("Error creating new comment in seeds.js: " + error)
-    //             else {
-    //               retDest.comments.push(retComment)
-    //               retDest.save()
-    //               console.log("Create 1 new comment!")
-    //             }
-    //           })
-    //         }
-    //       })
-    //     }
-    // }
+    if (error)
+      console.log("Error when clearing file in seeds.js: " + error)
+    else {
+      console.log("Database is cleared succesfully")
+      // Populate  YelpTravel_destinations database from data list above
+      for (var destination of data){
+        Destination.create(destination, (error, retDest) => {
+            if (error) console.log(error)
+            else{
+              console.log("Added a Destination.")
+              // Create a comment for each post
+              Comment.create({
+                content: "This place is great, but I wish there was Internet.",
+                author: {
+                    id : ("5d32b4b2fd13e359f9d0c593"),
+                    username: "zach",
+                }
+              }, (error, retComment)=>{
+                if (error) console.log("Error creating new comment in seeds.js: " + error)
+                else {
+                  retDest.comments.push(retComment)
+                  retDest.save()
+                  console.log("Create 1 new comment!")
+                }
+              })
+            }
+          })
+        }
+    }
   })
 
 

@@ -3,6 +3,7 @@ const port        = 5000
 var express       = require("express"),
     app           = express(),
     bodyParser    = require("body-parser"),    // for Express's post method
+    methodOverride= require("method-override"), // Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
     mongoose      = require("mongoose"),
     passport      = require("passport"),
     LocalStrategy = require("passport-local"),
@@ -18,6 +19,7 @@ mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParse
 app.use(express.static(__dirname + "/public"))    // __dirname is the directory app.css is located
 // tell Express to use body parser to parse client's request's information (like form's input)
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride("_method"))
 // clear Db and populate it with fake destinations. If uncomment, Might run into error "Cannot read property 'name' of null  error" then see at the end.
 seedDB()
 
@@ -62,7 +64,7 @@ app.get("/destinations/new", isLoggedIn, (req, res) =>{
 })
 
 
-// CREATE Route: Creating new destinations to Db, same URL as 'get' method cuz RESTFUL
+// CREATE Route: Create new destination to Db from NEW form, same URL as 'get' method cuz RESTFUL
 // isLoggedIn() is a middleware function that checked if user is logged in. If they are, render new.ejs. If not, redirect to /login
 app.post("/destinations", isLoggedIn, (req, res) => {
   // Test: when user hits submit button, server will see this as proof that routing works
@@ -103,6 +105,38 @@ app.get("/destinations/:id", (req, res) => {
   })
 })
 
+// EDIT route: Show form to edit destination posts.
+// Thanks to method-override, we can override this get method with
+app.get("/destinations/:id/edit", (req, res)=>{
+  Destination.findById(req.params.id, (error, retDestination)=>{
+    if (error) return res.redirect("/destinations")
+    else {
+      res.render("destinations_edit.ejs", {destination: retDestination})
+    }
+  })
+})
+
+// UPDATE route: Take the changes from edit form and update the destination post in database
+app.put("/destinations/:id", (req, res)=>{
+  // var updates = {
+  //     name: req.body.destName,
+  //     state: req.body.state,
+  //     country: req.body.country,
+  //     image: req.body.img_url,
+  //     description: req.body.description,
+  //     author: {
+  //       id: req.user._id,
+  //       username: req.user.username
+  //     }
+  // }
+  // Instead of that, change the names in edit form. Example: from name="destName" to name="destination[name]"
+  Destination.findByIdAndUpdate(req.params.id, req.body.destination, (error, updatedDest)=>{
+    if (error) res.redirect("/destinations")
+    else {
+      res.redirect("/destinations/" + req.params.id)
+    }
+  })
+})
 
 // =============================================
 //             COMMENT ROUTES

@@ -21,6 +21,9 @@
           <p style="text-transform: capitalize">
             <em>Submitted by <%= destination.author.username%></em>
           </p>
+          <div class="text-left">
+              <a class="btn btn-warning" href="/destinations/<%= destination._id%>/edit">Edit post</a>
+          </div>
         </div>
       </div> <!-- ./thumbnail -->
       <div class="well">
