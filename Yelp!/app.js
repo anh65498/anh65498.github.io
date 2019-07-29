@@ -15,6 +15,7 @@ var express       = require("express"),
 
 // create Db inside mongoDB or use existing Db
 mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParser: true })
+mongoose.set('useFindAndModify', false);    // fix deprecation
 // tell Express to look inside "public" directory for CSS files
 app.use(express.static(__dirname + "/public"))    // __dirname is the directory app.css is located
 // tell Express to use body parser to parse client's request's information (like form's input)
@@ -36,8 +37,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());           // reading the session, encode and decode data from session (method of passportLocalMongoose)
 passport.deserializeUser(User.deserializeUser());       // reading the session, encode and decode data from session (method of passportLocalMongoose)
 app.use(function(req, res, next){
-  res.locals.currentUser = req.user;      // whatever variable comes after res.locals will be available inside next. Next is the code block that in the routes
-  next()
+  res.locals.currentUser = req.user;      // whatever variable comes after res.locals will be available inside ejs file in the all routes.
+  next()                                  // Next is the code block that in the routes
 })  // whatever function is in use() will be called on every route, because every route has navbar and we want to show username on it when user logs in
 
 
@@ -107,12 +108,10 @@ app.get("/destinations/:id", (req, res) => {
 
 // EDIT route: Show form to edit destination posts.
 // Thanks to method-override, we can override this get method with
-app.get("/destinations/:id/edit", (req, res)=>{
+// Only allow user who create the destination post to see the form
+app.get("/destinations/:id/edit", checkOwnership, (req, res)=>{
   Destination.findById(req.params.id, (error, retDestination)=>{
-    if (error) return res.redirect("/destinations")
-    else {
-      res.render("destinations_edit.ejs", {destination: retDestination})
-    }
+    res.render("destinations_edit.ejs", {destination: retDestination})
   })
 })
 
@@ -146,6 +145,8 @@ app.use("/destinations/:id", (req, res)=>{
       res.redirect("/destinations/")
   })
 })
+
+
 // =============================================
 //             COMMENT ROUTES
 // =============================================
@@ -234,7 +235,7 @@ app.get("/logout", function(req, res){
    res.redirect("/destinations");
 });
 
-// isLoggedIn() is a middleware function that checked if user is logged in.
+// isLoggedIn() is a middleware function that checks if user is logged in.
 // If they are, continue with the code after it is called. If not, redirect to /login
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
@@ -243,6 +244,23 @@ function isLoggedIn(req, res, next){
     res.redirect("/login");
 }
 
+// checkOwnership() is a middleware function that checks if user owns the post/comment or not
+// If he/she is, continue with the code after it is called. If not, redirect
+function checkOwnership(req, res, next){
+  if (req.isAuthenticated()){
+    Destination.findById(req.params.id, (error, retDestination)=>{
+      if (error) return res.redirect("back")
+      else {
+        if (retDestination.author.id.equals(req.user._id))    // does user own campgrounds?
+          next()
+        else
+          res.redirect("back")  // take user back to previous page they were on
+      }
+    })
+  } else {
+    res.redirect("/login");     // take user back to previous page they were on
+  }
+}
 
 app.listen(port, () => console.log(`Yelp App server is listening on port ${port}`))
 

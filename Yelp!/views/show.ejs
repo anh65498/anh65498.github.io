@@ -21,14 +21,18 @@
           <p style="text-transform: capitalize">
             <em>Submitted by <%= destination.author.username%></em>
           </p>
-          <div id="button" class="text-left" >
-              <a class="btn btn-warning" href="/destinations/<%= destination._id%>/edit">Edit</a>
-          </div>
-          <!-- Form that is shown as a button to delete post -->
-          <form id="button" action="/destinations/<%=destination._id%>?_method=DELETE" method="post">
-            <button class="btn btn-danger" name="button">Delete</button>
-          </form>
-        </div>
+
+          <% if(currentUser && destination.author.id.equals(currentUser._id)){ %>    <!-- only allow user to edit/delete post -->
+            <div id="button" class="text-left" >
+                <a class="btn btn-warning" href="/destinations/<%= destination._id%>/edit">Edit</a>
+            </div>
+            <!-- Form that is shown as a button to delete post -->
+            <form id="button" action="/destinations/<%=destination._id%>?_method=DELETE" method="post">
+              <button class="btn btn-danger" name="button">Delete</button>
+            </form>
+          <% } %>
+
+        </div>  <!-- ./caption -->
       </div> <!-- ./thumbnail -->
       <div class="well">
         <div class="text-right">
