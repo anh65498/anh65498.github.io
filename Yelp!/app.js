@@ -116,7 +116,7 @@ app.get("/destinations/:id/edit", checkOwnership, (req, res)=>{
 })
 
 // UPDATE route: Take the changes from edit form and update the destination post in database
-app.put("/destinations/:id", (req, res)=>{
+app.put("/destinations/:id", checkOwnership, (req, res)=>{
   // var updates = {
   //     name: req.body.destName,
   //     state: req.body.state,
@@ -139,10 +139,16 @@ app.put("/destinations/:id", (req, res)=>{
 
 // DESTROY route: delete destination post (triggered by "Delete" button on show page)
 app.delete("/destinations/:id", checkOwnership, (req, res)=>{
-  Destination.findByIdAndRemove(req.params.id, (error) =>{
+  Destination.findByIdAndRemove(req.params.id, (error, destinationRemoved) =>{
     if (error) res.redirect("/")
-    else
-      res.redirect("/destinations/")
+    else{
+      Comment.deleteMany({_id: {$in: destinationRemoved.comments}}, (error)=>{
+        if (error) console.log(error)
+        else
+          res.redirect("/destinations/")
+      })
+
+    }
   })
 })
 
@@ -150,17 +156,17 @@ app.delete("/destinations/:id", checkOwnership, (req, res)=>{
 // =============================================
 //             COMMENT ROUTES
 // =============================================
-// NEW route: Show form to create a new comment attached to a destination post
+// COMMENT NEW route: Show form to create a new comment attached to a destination post
 app.get("/destinations/:id/comments/new", isLoggedIn, (req, res) =>{
   // find destination by id from db to pass destination's data to the form
   Destination.findById(req.params.id, (error, retDestination) => {
     if (error) console.log("Error getting destination by ID in comment route: " + error)
     else
-      res.render("new_comment.ejs", {destination : retDestination})
+      res.render("comment_new.ejs", {destination : retDestination})
   })
 })
 
-// CREATE route: Create a new comment then attach it to a destination post
+// COMMENT CREATE route: Create a new comment then attach it to a destination post
 // Need to be protected from people sending post request via POSTMAN by isLoggedIn()
 app.post("/destinations/:id/comments", isLoggedIn, (req, res) =>{
   // lookup destination using ID
@@ -189,6 +195,24 @@ app.post("/destinations/:id/comments", isLoggedIn, (req, res) =>{
   })
 })
 
+// COMMENT EDIT route: Show edit form to edit comment
+app.get("/destinations/:id/comments/:comment_id/edit", (req, res) =>{
+  Comment.findById(req.params.comment_id, (error, foundComment) =>{
+    if (error) res.redirect("back")
+    else {
+    res.render("comment_edit.ejs", {destination_id : req.params.id, comment:foundComment})
+    }
+  })
+})
+
+// COMMENT UPDATE route: Take data from edit comment form and update comment in DB
+app.put("/destinations/:id/comments/:comment_id", (req, res) =>{
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (error, updatedComment)=>{
+    if (error) res.redirect("back")
+    else
+      res.redirect("/destinations/" + req.params.id)
+  })
+})
 
 
 // =============================================
