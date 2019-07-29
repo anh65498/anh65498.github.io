@@ -109,14 +109,14 @@ app.get("/destinations/:id", (req, res) => {
 // EDIT route: Show form to edit destination posts.
 // Thanks to method-override, we can override this get method with
 // Only allow user who create the destination post to see the form
-app.get("/destinations/:id/edit", checkOwnership, (req, res)=>{
+app.get("/destinations/:id/edit", checkPostOwnership, (req, res)=>{
   Destination.findById(req.params.id, (error, retDestination)=>{
     res.render("destinations_edit.ejs", {destination: retDestination})
   })
 })
 
 // UPDATE route: Take the changes from edit form and update the destination post in database
-app.put("/destinations/:id", checkOwnership, (req, res)=>{
+app.put("/destinations/:id", checkPostOwnership, (req, res)=>{
   // var updates = {
   //     name: req.body.destName,
   //     state: req.body.state,
@@ -138,7 +138,7 @@ app.put("/destinations/:id", checkOwnership, (req, res)=>{
 })
 
 // DESTROY route: delete destination post (triggered by "Delete" button on show page)
-app.delete("/destinations/:id", checkOwnership, (req, res)=>{
+app.delete("/destinations/:id", checkPostOwnership, (req, res)=>{
   Destination.findByIdAndRemove(req.params.id, (error, destinationRemoved) =>{
     if (error) res.redirect("/")
     else{
@@ -196,7 +196,7 @@ app.post("/destinations/:id/comments", isLoggedIn, (req, res) =>{
 })
 
 // COMMENT EDIT route: Show edit form to edit comment
-app.get("/destinations/:id/comments/:comment_id/edit", (req, res) =>{
+app.get("/destinations/:id/comments/:comment_id/edit", checkCommentOwnership, (req, res) =>{
   Comment.findById(req.params.comment_id, (error, foundComment) =>{
     if (error) res.redirect("back")
     else {
@@ -206,7 +206,7 @@ app.get("/destinations/:id/comments/:comment_id/edit", (req, res) =>{
 })
 
 // COMMENT UPDATE route: Take data from edit comment form and update comment in DB
-app.put("/destinations/:id/comments/:comment_id", (req, res) =>{
+app.put("/destinations/:id/comments/:comment_id", checkCommentOwnership, (req, res) =>{
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (error, updatedComment)=>{
     if (error) res.redirect("back")
     else
@@ -215,7 +215,7 @@ app.put("/destinations/:id/comments/:comment_id", (req, res) =>{
 })
 
 // COMMENT DELETE: delete comment
-app.delete("/destinations/:id/comments/:comment_id", (req, res)=>{
+app.delete("/destinations/:id/comments/:comment_id", checkCommentOwnership, (req, res)=>{
   Comment.findByIdAndRemove(req.params.comment_id, (error, deletedComment) =>{
     if(error) res.redirect("back")
     else{
@@ -228,10 +228,10 @@ app.delete("/destinations/:id/comments/:comment_id", (req, res)=>{
         else
           res.redirect("/destinations/" + req.params.id)
       })
-
     }
   })
 })
+
 // =============================================
 //                  AUTH ROUTES
 // =============================================
@@ -276,6 +276,10 @@ app.get("/logout", function(req, res){
    res.redirect("/destinations");
 });
 
+// =============================================
+//                  MIDDLEWARE
+// =============================================
+
 // isLoggedIn() is a middleware function that checks if user is logged in.
 // If they are, continue with the code after it is called. If not, redirect to /login
 function isLoggedIn(req, res, next){
@@ -285,9 +289,9 @@ function isLoggedIn(req, res, next){
     res.redirect("/login");
 }
 
-// checkOwnership() is a middleware function that checks if user owns the post/comment or not
+// checkPostOwnership() is a middleware function that checks if user owns the post or not
 // If he/she is, continue with the code after it is called. If not, redirect
-function checkOwnership(req, res, next){
+function checkPostOwnership(req, res, next){
   if (req.isAuthenticated()){
     Destination.findById(req.params.id, (error, retDestination)=>{
       if (error) return res.redirect("back")
@@ -302,6 +306,25 @@ function checkOwnership(req, res, next){
     res.redirect("/login");     // take user back to previous page they were on
   }
 }
+
+// checkCommentOwnership() is a middleware function that checks if user owns the comment or not
+// If he/she is, continue with the code after it is called. If not, redirect
+function checkCommentOwnership(req, res, next){
+  if (req.isAuthenticated()){
+    Comment.findById(req.params.comment_id, (error, retComment)=>{
+      if (error) return res.redirect("back")
+      else {
+        if (retComment.author.id.equals(req.user._id))    // does user own campgrounds?
+          next()
+        else
+          res.redirect("back")  // take user back to previous page they were on
+      }
+    })
+  } else {
+    res.redirect("/login");     // take user back to previous page they were on
+  }
+}
+
 
 app.listen(port, () => console.log(`Yelp App server is listening on port ${port}`))
 
