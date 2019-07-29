@@ -37,7 +37,7 @@ h1, h3 {
     padding: 10px;
 }
 
-#button{
+.button-to-form {         /* put edit, delete, add button inline */
   display: inline;
 }
 

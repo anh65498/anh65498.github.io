@@ -214,7 +214,24 @@ app.put("/destinations/:id/comments/:comment_id", (req, res) =>{
   })
 })
 
+// COMMENT DELETE: delete comment
+app.delete("/destinations/:id/comments/:comment_id", (req, res)=>{
+  Comment.findByIdAndRemove(req.params.comment_id, (error, deletedComment) =>{
+    if(error) res.redirect("back")
+    else{
+      // delete comment from Destination Db
+      Destination.findByIdAndUpdate(req.params.id,
+        {
+          $pull: { comments: req.params.comment_id }      // https://docs.mongodb.com/manual/reference/operator/update/pull/#up._S_pull
+        }, (error, retDestination) =>{
+        if(error) console.log(error)
+        else
+          res.redirect("/destinations/" + req.params.id)
+      })
 
+    }
+  })
+})
 // =============================================
 //                  AUTH ROUTES
 // =============================================

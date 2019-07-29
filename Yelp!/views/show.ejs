@@ -45,8 +45,12 @@
               <span class="pull-right">10 days ago</span>
               <p><strong><%=comment.author.username %></strong></p>
               <p><%=comment.content %></p>
-              <a class="btn btn-xs btn-warning" 
+              <a class="btn btn-xs btn-warning"
                   href="/destinations/<%= destination._id %>/comments/<%= comment._id %>/edit">Edit</a>
+              <form class="button-to-form" action="/destinations/<%= destination._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+                <button class="btn btn-xs btn-danger">Delete</button>
+              </form>
+
             </div>
           </div>  <!-- ./row -->
         <% } %>
