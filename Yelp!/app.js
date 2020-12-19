@@ -15,7 +15,7 @@ var express = require("express"),
 
 // create Db inside mongoDB or use existing Db
 // mongoose.connect("mongodb://localhost/YelpTravel_destinations", { useNewUrlParser: true })   // old code
-mongoose.connect("mongodb+srv://<username>:<password>@cluster-5h8vr1w3.s3q75.mongodb.net/heroku_5h8vr1w3?retryWrites=true&w=majority", { useNewUrlParser: true }) // new code to migrate to Cloud Atlas
+mongoose.connect("mongodb+srv://anh65498:horny5(Waugh@cluster-5h8vr1w3.s3q75.mongodb.net/heroku_5h8vr1w3?retryWrites=true&w=majority", { useNewUrlParser: true }) // new code to migrate to Cloud Atlas
 mongoose.set('useFindAndModify', false);    // fix deprecation
 // tell Express to look inside "public" directory for CSS files
 app.use(express.static(__dirname + "/public"))    // __dirname is the directory app.css is located
