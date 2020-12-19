@@ -9,7 +9,7 @@ Languages: HTML, CSS, Javascript
 
 - `sudo killall mongod` to stop any mongod process running
 
-- `mongod`
+- `mongod` to run mongod. `mongo` to open the local database. Inside `mongo` terminal, `show dbs` -> `use YelpTravel_destinations` -> `show collections` -> `db.users.find()` to show all users
 
 - `nodemon app.js`
 
