@@ -1,0 +1,36 @@
+<% include partials/header.ejs %>
+<div class="ui main text container segment">
+  <div class="ui huge header">Create A New Project</div>
+
+  <form class="ui form" action="/projects" method="POST">
+    <div class="field">
+      <label>Name: </label>
+      <input type="text" name="project[name]">
+    </div>
+
+    <div class="field">
+      <label>Description: </label>
+      <textarea type="text" name="project[description]" rows="4" cols="50"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Tools Used: </label>
+      <input type="text" name="project[tools]">
+    </div>
+
+    <div class="field">
+      <label>Cover Photo Link(We believe Visual is key so add a fun picture here): </label>
+      <input type="text" name="project[cover-img]">
+    </div>
+
+    <div class="field">
+      <label>Author: </label>
+      <input type="text" name="project[author]">
+    </div>
+
+
+    <button class="ui big blue basic button">Submit</button>
+  </form>
+</div>
+
+<% include partials/footer.ejs %>
