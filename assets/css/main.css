@@ -24,7 +24,8 @@ section, summary, time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	scroll-behavior: smooth;}
+	scroll-behavior: smooth;
+}
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -99,7 +100,8 @@ input, select, textarea {
 		}
 
 	body, input, select, textarea {
-		color: #a2a2a2;
+		background-color: #fafbfc;
+		color: #647383;
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 16pt;
 		font-weight: 400;
@@ -139,7 +141,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #787878;
+		color: #647383;
 		font-weight: 400;
 		line-height: 1em;
 		margin: 0 0 1em 0;
@@ -151,12 +153,12 @@ input, select, textarea {
 		}
 
 	h1 {
-		font-size: 2em;
+		font-size: 2.25em;
 		line-height: 1.5em;
 	}
 
 	h2 {
-		font-size: 1.5em;
+		font-size: 2em;
 		line-height: 1.5em;
 	}
 
@@ -2567,12 +2569,10 @@ input, select, textarea {
 		}
 
 		.work-item h3 {
-			font-size: 1em;
 			margin: 0 0 0.5em 0;
 		}
 
 		.work-item p {
-			font-size: 0.8em;
 			line-height: 1.5em;
 			margin: 0;
 		}
@@ -2629,7 +2629,7 @@ input, select, textarea {
 		}
 
 		#header strong, #header b {
-			color: #ffffff;
+			color: #FF10F0;
 		}
 
 		#header h2, #header h3, #header h4, #header h5, #header h6 {
@@ -2637,7 +2637,7 @@ input, select, textarea {
 		}
 
 		#header h1 {
-			color: rgba(255, 255, 255, 0.5);
+			color: white;
 			font-size: 1.35em;
 			line-height: 1.75em;
 			margin: 0;
